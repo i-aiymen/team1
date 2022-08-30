@@ -5,6 +5,8 @@ class PlayerTank < Sprite
     @img_width
     @img_height
     @isPotrait
+    @movementAtColl_x # Contains the input.x at the time of collision
+    @movementAtColl_y # Contains the input.x at the time of collision
 
     def initialize
         image = Image.load("image/player_tank.png")
@@ -14,6 +16,8 @@ class PlayerTank < Sprite
         @currentPosX = 0
         @currentPosY = 230
         @isPotrait = false
+        @movementAtColl_x = 0
+        @movementAtColl_y = 0
 
         super(@currentPosX,@currentPosY,image)
     end
@@ -34,7 +38,16 @@ class PlayerTank < Sprite
         i_y = Input.y 
         rotAngle = self.angle 
 
-        # If the user presses both the movement keys a time, it should not move
+        # puts "i_x = #{i_x}, i_y = #{i_y}"
+        # puts "mov_x = #{@movementAtColl_x}, mov_y = #{@movementAtColl_y}"
+
+        if(@movingStatus == false && (i_x != @movementAtColl_x || i_y != @movementAtColl_y))
+            puts "movingStat : #{@movingStatus}"
+            @movingStatus = true
+        end
+        # puts "movingStat : #{@movingStatus}"
+
+        # If the user presses both the movement keys a time, tank should not move
         if(!@movingStatus || i_x != 0 && i_y != 0)
             return
         end
@@ -63,7 +76,7 @@ class PlayerTank < Sprite
         self.y += i_y
 
 
-        puts "Angle of Rotation : #{self.angle}, x : #{self.x}, y : #{self.y}"
+        # puts "Angle of Rotation : #{self.angle}, x : #{self.x}, y : #{self.y}"
     end
 
     def getImageSize
@@ -75,8 +88,12 @@ class PlayerTank < Sprite
         @img_height = height
     end
 
+    # Shot function - Collision with metal crate
     def coll_with_metal
-        
+        @movingStatus = false
+
+        @movementAtColl_x = Input.x 
+        @movementAtColl_y = Input.y 
     end
 
 end
