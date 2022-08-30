@@ -25,28 +25,19 @@ class Level1
         num_y = @@map.size
         num_x = num_y ? @@map[0].size : 0 # Error proof
 
-        puts "num_x : #{num_x}, num_y = #{num_y}"
+        # puts "num_x : #{num_x}, num_y = #{num_y}"
 
         for i in 0 ... num_y
             for j in 0 ... num_x
                 case(@@map[i][j])
                 when 1
-                    metal_crateSprite = Sprite.new(j * 80, i * 75, @@metal_crate)
-                    puts "x = #{j * 80} y = #{i * 75}"
-                    Sprite.draw(metal_crateSprite)
+                    Window.draw(j * 80, i * 75, @@metal_crate)
                 when 2
-                    wooden_crateSprite = Sprite.new(j * 80, i * 75, @@wooden_crate)
-                    puts "x = #{j * 80} y = #{i * 75}"
-                    Sprite.draw(wooden_crateSprite)
+                    Window.draw(j * 80, i * 75, @@wooden_crate)
                 when 3
-                    spikeSprite = Sprite.new(j * 80, i * 75, @@spike)
-                    puts "x = #{j * 80} y = #{i * 75}"
-                    Sprite.draw(spikeSprite)
+                    Window.draw(j * 80, i * 75, @@spike)
                 when 4
-                    spikeSprite = Sprite.new(j * 80, i * 75, @@spike)
-                    spikeSprite.angle=(180)
-                    puts "x = #{j * 80} y = #{i * 75}"
-                    Sprite.draw(spikeSprite)
+                    Window.draw_rot(j * 80, i * 75, @@spike, 180)
                 end
             end
         end
