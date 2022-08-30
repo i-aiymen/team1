@@ -1,4 +1,6 @@
-require_relative '../char/playerTank.rb'
+require_relative '../sprite/metalCrate.rb'
+require_relative '../sprite/woodenCrate.rb'
+require_relative '../sprite/spike.rb'
 
 class Level1
     # For the maps
@@ -28,7 +30,10 @@ class Level1
     @@spike = Image.load("image/spike.png")
 
     def self.returnSprites
-        sprites = []
+        metalSprites = []
+        woodenSprites = []
+        spikeSprites = []
+
         num_y = @@map.size
         num_x = num_y ? @@map[0].size : 0 # Error proof
 
@@ -38,26 +43,24 @@ class Level1
             for j in 0 ... num_x
                 case(@@map[i][j])
                 when 1
-                    metalCrate_sprite = Sprite.new(j * 80, i * 75, @@metal_crate)
-                    sprites << metalCrate_sprite # Adding the sprite to the array
+                    metalSprites << MetalCrate.new(j * 80, i * 75, @@metal_crate)
+                    # Adding the sprite to the array
         
                 when 2
-                    woodenCrate_sprite = Sprite.new(j * 80, i * 75, @@wooden_crate)
-                    sprites << woodenCrate_sprite
+                    woodenSprites << WoodenCrate.new(j * 80, i * 75, @@wooden_crate)
+                    
         
                 when 3
-                    spikeDown_sprite = Sprite.new(j * 80, i * 75, @@spike)
-                    sprites << spikeDown_sprite
+                    spikeSprites << Sprite.new(j * 80, i * 75, @@spike)
+                     
         
                 when 4
-                    spikeUp_sprite = Sprite.new(j * 80, i * 75, @@spike, 180)
-                    spikeUp_sprite.angle=(180)
-                    sprites << spikeUp_sprite
+                    spikeSprites << Spike.new(j * 80, i * 75, @@spike).angle=(180)
                 end
             end
         end
 
-        return sprites
+        return metalSprites, woodenSprites, spikeSprites
     end
 
     # def self.p_moveTank(playerTank)

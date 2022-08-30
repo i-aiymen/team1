@@ -1,19 +1,25 @@
 require 'dxruby'
-require_relative './char/playerTank.rb'
-require_relative './level/level1'
+
+Dir['./char/*.rb', './level/*.rb'].each do |file|
+    require_relative file
+  end
 
 #window settings
 Window.width = 640
 Window.height = 676
 Window.caption = "Shooting Game"
 Window.bgcolor = C_WHITE
-level1Sprites = Level1.returnSprites
+metalSprites, woodenSprites, spikeSprites = Level1.returnSprites
 
 
 playerTank = PlayerTank.new
 
 Window.loop do
-    # Level1.draw
-    Sprite.draw(level1Sprites)
+    Sprite.draw(metalSprites)
+    Sprite.draw(woodenSprites)
+    Sprite.draw(spikeSprites)
     playerTank.draw
+
+    playerTank.move
+
 end
