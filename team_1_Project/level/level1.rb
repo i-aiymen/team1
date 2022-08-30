@@ -55,7 +55,10 @@ class Level1
                      
         
                 when 4
-                    spikeSprites << Spike.new(j * 80, i * 75, @@spike).angle=(180)
+                    spikeTopSprite =  Spike.new(j * 80, i * 75, @@spike)
+                    spikeTopSprite.angle=(180)
+
+                    spikeSprites << spikeTopSprite
                 end
             end
         end
