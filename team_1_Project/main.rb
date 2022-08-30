@@ -7,10 +7,13 @@ Window.width = 640
 Window.height = 676
 Window.caption = "Shooting Game"
 Window.bgcolor = C_WHITE
+level1Sprites = Level1.returnSprites
+
 
 playerTank = PlayerTank.new
 
 Window.loop do
-    Level1.draw
+    # Level1.draw
+    Sprite.draw(level1Sprites)
     playerTank.draw
 end

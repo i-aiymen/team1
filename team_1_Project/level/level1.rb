@@ -27,7 +27,8 @@ class Level1
     @@wooden_crate = Image.load("image/wooden_crate.png")
     @@spike = Image.load("image/spike.png")
 
-    def self.draw
+    def self.returnSprites
+        sprites = []
         num_y = @@map.size
         num_x = num_y ? @@map[0].size : 0 # Error proof
 
@@ -37,17 +38,26 @@ class Level1
             for j in 0 ... num_x
                 case(@@map[i][j])
                 when 1
-                    Window.draw(j * 80, i * 75, @@metal_crate)
+                    metalCrate_sprite = Sprite.new(j * 80, i * 75, @@metal_crate)
+                    sprites << metalCrate_sprite # Adding the sprite to the array
+        
                 when 2
-                    Window.draw(j * 80, i * 75, @@wooden_crate)
+                    woodenCrate_sprite = Sprite.new(j * 80, i * 75, @@wooden_crate)
+                    sprites << woodenCrate_sprite
+        
                 when 3
-                    Window.draw(j * 80, i * 75, @@spike)
-                    puts "Spike pos x : #{j * 80}, y : #{i * 75}"
+                    spikeDown_sprite = Sprite.new(j * 80, i * 75, @@spike)
+                    sprites << spikeDown_sprite
+        
                 when 4
-                    Window.draw_rot(j * 80, i * 75, @@spike, 180)
+                    spikeUp_sprite = Sprite.new(j * 80, i * 75, @@spike, 180)
+                    spikeUp_sprite.angle=(180)
+                    sprites << spikeUp_sprite
                 end
             end
         end
+
+        return sprites
     end
 
     # def self.p_moveTank(playerTank)
