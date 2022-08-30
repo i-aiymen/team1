@@ -22,4 +22,8 @@ Window.loop do
 
     playerTank.move
 
+    Sprite.check(playerTank, metalSprites, nil)
+    Sprite.check(playerTank, woodenSprites, nil)
+    Sprite.check(playerTank, spikeSprites, nil)
+
 end

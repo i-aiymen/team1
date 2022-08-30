@@ -51,7 +51,7 @@ class Level1
                     
         
                 when 3
-                    spikeSprites << Sprite.new(j * 80, i * 75, @@spike)
+                    spikeSprites << Spike.new(j * 80, i * 75, @@spike)
                      
         
                 when 4

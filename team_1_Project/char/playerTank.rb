@@ -75,4 +75,8 @@ class PlayerTank < Sprite
         @img_height = height
     end
 
+    def coll_with_metal
+        
+    end
+
 end
