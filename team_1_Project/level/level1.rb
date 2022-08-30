@@ -1,3 +1,5 @@
+require_relative '../char/playerTank.rb'
+
 class Level1
     # For the maps
     # 1 - Metal Crate
@@ -16,6 +18,10 @@ class Level1
         [1,0,0,0,0,0,0,1],
         [1,1,1,1,1,1,1,1]
     ]
+
+    @@movEffect = 0 # What should happen when playerTank moves
+    @@y = 4 # y coordinate of the playerTank at an instant time
+    @@x = 0 # x coordinate of the playerTank at an instant time
 
     @@metal_crate = Image.load("image/metal_crate.png")
     @@wooden_crate = Image.load("image/wooden_crate.png")
@@ -36,11 +42,52 @@ class Level1
                     Window.draw(j * 80, i * 75, @@wooden_crate)
                 when 3
                     Window.draw(j * 80, i * 75, @@spike)
+                    puts "Spike pos x : #{j * 80}, y : #{i * 75}"
                 when 4
                     Window.draw_rot(j * 80, i * 75, @@spike, 180)
                 end
             end
         end
-
     end
+
+    # def self.p_moveTank(playerTank)
+    #     # @@y += Input.y
+    #     # @@x += Input.x 
+        
+    #     # puts "map val : #{@@map[@@y + Input.y][@@x + Input.x]}"
+    #     exchange, tankWidth, tankHeight = playerTank.getImageSize
+
+    #     if exchange
+    #         tankWidth, tankHeight = tankHeight, tankWidth
+    #     end
+
+    #     # if(Input.x)
+    #     #     currentPosX = playerTank.x + Input.x + tankWidth*Input.x
+    #     # end
+
+    #     # if(Input.y)
+    #     #     currentPosY = playerTank.y + Input.y + tankHeight*Input.y
+    #     # end
+
+    #     # currentPosX = playerTank.x 
+    #     # currentPosY = playerTank.y 
+
+    #     # puts "Tank Width : #{tankWidth}, Tank Height : #{tankHeight}"
+    #     # puts "Current Pos x : #{currentPosX}, y = #{currentPosY}"
+
+    #     # @@y = (playerTank.y + Input.y + tankHeight * Input.y) / 75
+    #     # @@x = (playerTank.x + Input.x + tankWidth * Input.x) / 80
+        
+    #     # puts "Current x : #{@@x}, #{@@y}, Map Value : #{@@map[@@y][@@x]}"
+
+    #     # if(@@map[@@y + Input.y][@@x + Input.x] == 1)
+    #     #     playerTank.setMovingStatus(false)
+    #     # else
+    #     #     @@y += Input.y
+    #     #     @@x += Input.x
+    #     #     playerTank.setMovingStatus(true)
+    #     # end
+
+    #     # puts "tank y = #{@@y}, x = #{@@x}, map val : #{@@map[@@y][@@x]}"
+    # end
 end
