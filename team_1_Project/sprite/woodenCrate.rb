@@ -3,7 +3,8 @@ class WoodenCrate < Sprite
         super(x,y,img)
     end
 
+    # With the playerTank
     def hit 
-        puts "COLLISION WITH WOODEN CRATE ================"
+        self.vanish
     end
 end
