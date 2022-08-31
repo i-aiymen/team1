@@ -9,21 +9,12 @@ Window.width = 720
 Window.height = 676
 Window.caption = "Shooting Game"
 Window.bgcolor = C_WHITE
-metalSprites, woodenSprites, spikeSprites = Level1.returnSprites # Array containing the particular sprites
 
-
-playerTank = PlayerTank.new
+level1 = Level1.new
 
 Window.loop do
-    Sprite.draw(metalSprites)
-    Sprite.draw(woodenSprites)
-    Sprite.draw(spikeSprites)
-    playerTank.draw
-    
-    playerTank.move
 
-    Sprite.check(playerTank, metalSprites, :coll_with_metal)
-    Sprite.check(playerTank, woodenSprites, nil) # Hit method of WoodenSprite is called
-    Sprite.check(playerTank, spikeSprites, nil) # Hit method of spikeSprite is called
+    level1.draw
 
+    level1.update
 end
