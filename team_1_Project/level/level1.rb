@@ -65,45 +65,4 @@ class Level1
 
         return metalSprites, woodenSprites, spikeSprites
     end
-
-    # def self.p_moveTank(playerTank)
-    #     # @@y += Input.y
-    #     # @@x += Input.x 
-        
-    #     # puts "map val : #{@@map[@@y + Input.y][@@x + Input.x]}"
-    #     exchange, tankWidth, tankHeight = playerTank.getImageSize
-
-    #     if exchange
-    #         tankWidth, tankHeight = tankHeight, tankWidth
-    #     end
-
-    #     # if(Input.x)
-    #     #     currentPosX = playerTank.x + Input.x + tankWidth*Input.x
-    #     # end
-
-    #     # if(Input.y)
-    #     #     currentPosY = playerTank.y + Input.y + tankHeight*Input.y
-    #     # end
-
-    #     # currentPosX = playerTank.x 
-    #     # currentPosY = playerTank.y 
-
-    #     # puts "Tank Width : #{tankWidth}, Tank Height : #{tankHeight}"
-    #     # puts "Current Pos x : #{currentPosX}, y = #{currentPosY}"
-
-    #     # @@y = (playerTank.y + Input.y + tankHeight * Input.y) / 75
-    #     # @@x = (playerTank.x + Input.x + tankWidth * Input.x) / 80
-        
-    #     # puts "Current x : #{@@x}, #{@@y}, Map Value : #{@@map[@@y][@@x]}"
-
-    #     # if(@@map[@@y + Input.y][@@x + Input.x] == 1)
-    #     #     playerTank.setMovingStatus(false)
-    #     # else
-    #     #     @@y += Input.y
-    #     #     @@x += Input.x
-    #     #     playerTank.setMovingStatus(true)
-    #     # end
-
-    #     # puts "tank y = #{@@y}, x = #{@@x}, map val : #{@@map[@@y][@@x]}"
-    # end
 end
