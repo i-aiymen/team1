@@ -147,7 +147,7 @@ class Level1
 
         # Collision with other sprites
         if Sprite.check(@bulletSprite, @metalSprites) || Sprite.check(@bulletSprite, @woodenSprites) || Sprite.check(@bulletSprite, @spikeSprites, nil, :hit_bullet)
-            @playerShoot = false
+            @playerShoot = false # To stop the bullet movement
         end
 
     end

@@ -3,7 +3,7 @@ class WoodenCrate < Sprite
         super(x,y,img)
     end
 
-    # With the playerTank
+    # With the playerTank, bullet
     def hit 
         self.vanish
     end

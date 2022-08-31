@@ -4,6 +4,7 @@ class Spike < Sprite
     end
 
     def hit_bullet
+        # Vanish the spike after colliding with the bullet
         self.vanish
     end
 
