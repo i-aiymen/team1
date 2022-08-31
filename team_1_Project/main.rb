@@ -26,7 +26,10 @@ Window.loop do
     # Sprite.check(playerTank, woodenSprites, nil) # Hit method of WoodenSprite is called
     # Sprite.check(playerTank, spikeSprites, nil) # Hit method of spikeSprite is called
 
-    a = GameOver.new
+    # a = GameOver.new
+    # a.draw
+
+    a = Home.new
     a.draw
 
 end
