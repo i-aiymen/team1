@@ -1,6 +1,6 @@
 require 'dxruby'
 
-Dir['./char/*.rb', './level/*.rb', './screens/*.rb'].each do |file|
+Dir['./char/*.rb', './level/*.rb'].each do |file|
     require_relative file
   end
 
@@ -15,17 +15,15 @@ metalSprites, woodenSprites, spikeSprites = Level1.returnSprites # Array contain
 playerTank = PlayerTank.new
 
 Window.loop do
-    # Sprite.draw(metalSprites)
-    # Sprite.draw(woodenSprites)
-    # Sprite.draw(spikeSprites)
-    # playerTank.draw
+    Sprite.draw(metalSprites)
+    Sprite.draw(woodenSprites)
+    Sprite.draw(spikeSprites)
+    playerTank.draw
     
-    # playerTank.move
+    playerTank.move
 
-    # Sprite.check(playerTank, metalSprites, :coll_with_metal)
-    # Sprite.check(playerTank, woodenSprites, nil)
-    # Sprite.check(playerTank, spikeSprites, nil)
-
-    GameOver.draw
+    Sprite.check(playerTank, metalSprites, :coll_with_metal)
+    Sprite.check(playerTank, woodenSprites, nil)
+    Sprite.check(playerTank, spikeSprites, nil)
 
 end
