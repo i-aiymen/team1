@@ -1,5 +1,3 @@
-require_relative "../sprite/bullet"
-
 class PlayerTank < Sprite
     @movingStatus
     @currentPosX
@@ -36,18 +34,6 @@ class PlayerTank < Sprite
 
 
     def move
-
-        # To check shooting key pressed
-        if Input.key_push?(K_SPACE)
-            @bullet_x = self.x + @img_width + 2
-            @bullet_y = self.y + @img_height / 2
-            @playerShoot = true
-        end
-
-        if @playerShoot
-            self.shoot_bullet
-        end
-
         i_x = Input.x
         i_y = Input.y 
         rotAngle = self.angle 
@@ -109,11 +95,4 @@ class PlayerTank < Sprite
         @movementAtColl_x = Input.x 
         @movementAtColl_y = Input.y 
     end
-
-    def shoot_bullet
-        
-
-
-    end
-
 end
