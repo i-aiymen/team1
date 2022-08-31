@@ -2,10 +2,11 @@ class Nickname
     @@backgroundImage = Image.load('image/background.png')
     @@secondaryBackground = Image.load('image/secondaryBackground.png')
     @@nicknameText = Image.load('image/nickName_text.png')
-    
+    @@textBox = Image.new(231, 42,[127, 255, 255, 255])
+    @@textBox.box_fill(0, 0, 231, 0.5, [200, 0, 0, 0])
 
     def initialize
-        @@backButton = Sprite.new(13,17, Image.load('image/back.png'))
+        @@backButton = Sprite.new(13,17, Image.load('image/back.png'))       
     end
 
     
@@ -38,6 +39,7 @@ class Nickname
         Window.draw(165, 143, @@secondaryBackground)
         Window.draw(228,165,@@nicknameText)
         Window.draw_font(255, 220, "(press Shift to toggle Case)", Font.new(20),{:color => C_BLACK})
+        Window.draw(240,280,@@textBox)
         Sprite.draw([@@backButton])
     end
 end
