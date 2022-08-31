@@ -5,7 +5,7 @@ Dir['./char/*.rb', './level/*.rb'].each do |file|
   end
 
 #window settings
-Window.width = 640
+Window.width = 720
 Window.height = 676
 Window.caption = "Shooting Game"
 Window.bgcolor = C_WHITE
@@ -23,7 +23,7 @@ Window.loop do
     playerTank.move
 
     Sprite.check(playerTank, metalSprites, :coll_with_metal)
-    Sprite.check(playerTank, woodenSprites, nil)
-    Sprite.check(playerTank, spikeSprites, nil)
+    Sprite.check(playerTank, woodenSprites, nil) # Hit method of WoodenSprite is called
+    Sprite.check(playerTank, spikeSprites, nil) # Hit method of spikeSprite is called
 
 end
