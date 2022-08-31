@@ -1,4 +1,3 @@
-require 'dxruby'
 class GameOver
     @@backgroundImage = Image.load('image/background.png')
     @@gameoverText = Image.load('image/gameover_text.png')

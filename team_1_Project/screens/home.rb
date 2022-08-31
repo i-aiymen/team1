@@ -1,4 +1,3 @@
-require 'dxruby'
 class Home
     @@backgroundImage = Image.load('image/background.png')
     @@gameNameText = Image.load('image/gameName_text.png')

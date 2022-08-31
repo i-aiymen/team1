@@ -29,7 +29,7 @@ Window.loop do
     # a = GameOver.new
     # a.draw
 
-    a = Home.new
+    a = Nickname.new
     a.draw
 
 end
