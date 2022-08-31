@@ -43,6 +43,8 @@ class Nickname
         Window.draw_font(255, 220, "(press Space to toggle Case)", Font.new(20),{:color => C_BLACK})
         Window.draw(240,280,@@textBox)
         Window.draw_font(240, 288, nickName, Font.new(25),{:color => C_BLACK})
+        Window.draw_font(295, 336, "Active:", Font.new(20),{:color => C_BLACK})
+        Window.draw_font(350, 336, ((caseType == 0)? "lowercase" : "uppercase"), Font.new(20),{:color => [255,164,47,68]})
         Sprite.draw([@@backButton])
     end
 end
