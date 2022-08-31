@@ -18,9 +18,12 @@ class Home
         if m === @@playButton
             @@playButton = Sprite.new(290,372, Image.load('image/playHover.png'))
         end
-        # if m === @@replayButton
-        #     @@replayButton = Sprite.new(370,380, Image.load('image/replayHover.png'))
-        # end
+        if m === @@settingsButton
+            @@settingsButton = Sprite.new(13,17, Image.load('image/settingsHover.png'))
+        end
+        if m === @@rulesButton
+            @@rulesButton = Sprite.new(13,80, Image.load('image/rulesHover.png'))
+        end
     end
 
     def draw
