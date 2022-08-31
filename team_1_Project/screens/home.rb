@@ -24,6 +24,12 @@ class Home
         if m === @@rulesButton
             @@rulesButton = Sprite.new(13,80, Image.load('image/rulesHover.png'))
         end
+        if m === @@musicButton
+            @@musicButton = Sprite.new(660,17, Image.load('image/musicHover.png'))
+        end
+        if m === @@exitButton
+            @@exitButton = Sprite.new(660,80, Image.load('image/exitHover.png'))
+        end
     end
 
     def draw
