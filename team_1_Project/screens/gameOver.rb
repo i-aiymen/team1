@@ -5,6 +5,7 @@ class GameOver
 
     def self.draw
         Window.draw(0, 0, @@backgroundImage)
-        Window.draw(200,100,@@homeButton)
+        Window.draw(290,380,@@homeButton)
+        Window.draw(370,380,@@replayButton)
     end
 end
