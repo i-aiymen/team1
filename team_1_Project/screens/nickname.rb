@@ -1,5 +1,6 @@
 class Nickname
     @@backgroundImage = Image.load('image/background.png')
+    @@secondaryBackground = Image.load('image/secondaryBackground.png')
     
 
     # def initialize
@@ -37,6 +38,7 @@ class Nickname
 
         # update(x, y)
         Window.draw(0, 0, @@backgroundImage)
+        Window.draw(165, 143, @@secondaryBackground)
         # Window.draw(212,241,@@gameNameText)
         # Sprite.draw([@@playButton,@@settingsButton,@@rulesButton,@@musicButton,@@exitButton])
     end
