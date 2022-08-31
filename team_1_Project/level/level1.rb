@@ -26,6 +26,7 @@ class Level1
     @bullet_x
     @bullet_y
     @bullet_speed
+    @bullet_angle
 
     @@metalCrate_img = Image.load("image/metal_crate.png")
     @@woodenCrate_img = Image.load("image/wooden_crate.png")
@@ -103,6 +104,7 @@ class Level1
         if Input.key_push?(K_SPACE)
             @bullet_x = @playerTankSprite.x + @@playerTank_img.width + 2
             @bullet_y = @playerTankSprite.y + @@playerTank_img.height / 2
+            @bullet_angle = @playerTankSprite.angle
             @playerShoot = true
         end
 
@@ -117,7 +119,7 @@ class Level1
         @bulletSprite = Bullet.new(@bullet_x, @bullet_y, Image.load("image/bullet_l1.png"))
         @bulletSprite.draw
 
-        case(@playerTankSprite.angle)
+        case(@bullet_angle)
         when 0
             puts @bullet_x
             @bullet_x += @bullet_speed
@@ -129,9 +131,6 @@ class Level1
         when -90
             @bullet_y -= @bullet_speed
         end
-
-        if @bullet_x == Window.width || @bullet_y == Window.height
-            @playerShoot = false 
-        end
+        
     end
 end
