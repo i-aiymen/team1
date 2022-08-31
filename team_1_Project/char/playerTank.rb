@@ -1,3 +1,5 @@
+require_relative "../sprite/bullet"
+
 class PlayerTank < Sprite
     @movingStatus
     @currentPosX
@@ -7,6 +9,10 @@ class PlayerTank < Sprite
     @isPotrait
     @movementAtColl_x # Contains the input.x at the time of collision
     @movementAtColl_y # Contains the input.x at the time of collision
+    @playerShoot
+    @bullet_x
+    @bullet_y
+    @bullet_speed
 
     def initialize
         image = Image.load("image/player_tank.png")
@@ -18,7 +24,8 @@ class PlayerTank < Sprite
         @isPotrait = false
         @movementAtColl_x = 0
         @movementAtColl_y = 0
-
+        @playerShoot = false
+        @bullet_speed = 3
         super(@currentPosX,@currentPosY,image)
     end
 
@@ -33,7 +40,21 @@ class PlayerTank < Sprite
     def getMovingStatus
         return @movingStatus
     end
+
+
     def move
+
+        # To check shooting key pressed
+        if Input.key_push?(K_SPACE)
+            @bullet_x = self.x + @img_width + 2
+            @bullet_y = self.y + @img_height / 2
+            @playerShoot = true
+        end
+
+        if @playerShoot
+            self.shoot_bullet
+        end
+
         i_x = Input.x
         i_y = Input.y 
         rotAngle = self.angle 
@@ -94,6 +115,29 @@ class PlayerTank < Sprite
 
         @movementAtColl_x = Input.x 
         @movementAtColl_y = Input.y 
+    end
+
+    def shoot_bullet
+        puts "Shooting"
+        bulletSprite = Bullet.new(@bullet_x, @bullet_y, Image.load("image/bullet_l1.png"))
+        bulletSprite.draw
+
+        case(self.angle)
+        when 0
+            puts @bullet_x
+            @bullet_x += @bullet_speed
+            puts @bullet_x
+        when 90
+            @bullet_y += @bullet_speed
+        when 180
+            @bullet_x -= @bullet_speed
+        when -90
+            @bullet_y -= @bullet_speed
+        end
+
+        
+
+
     end
 
 end
