@@ -1,3 +1,4 @@
+require_relative '../providers/inputName.rb'
 class Nickname
     @@backgroundImage = Image.load('image/background.png')
     @@secondaryBackground = Image.load('image/secondaryBackground.png')
@@ -38,8 +39,10 @@ class Nickname
         Window.draw(0, 0, @@backgroundImage)
         Window.draw(165, 143, @@secondaryBackground)
         Window.draw(228,165,@@nicknameText)
-        Window.draw_font(255, 220, "(press Shift to toggle Case)", Font.new(20),{:color => C_BLACK})
+        flag, nickName, caseType = NicknameInput.nameInput
+        Window.draw_font(255, 220, "(press Space to toggle Case)", Font.new(20),{:color => C_BLACK})
         Window.draw(240,280,@@textBox)
+        Window.draw_font(240, 288, nickName, Font.new(25),{:color => C_BLACK})
         Sprite.draw([@@backButton])
     end
 end
