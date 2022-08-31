@@ -95,4 +95,8 @@ class PlayerTank < Sprite
         @movementAtColl_x = Input.x 
         @movementAtColl_y = Input.y 
     end
+
+    def returnBulletPos
+        
+    end
 end

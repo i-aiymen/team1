@@ -19,14 +19,14 @@ class Level1
     @metalSprites
     @woodenSprites
     @spikeSprites
-    @playerTankSprite
+    @playerTank_sprite
     @enemyTankSprite
     @bulletSprite
     @playerShoot
     @bullet_x
     @bullet_y
     @bullet_speed
-    @bullet_angle
+    @tankShooting_angle # Angle of the bullet after tank fires it
 
     @@metalCrate_img = Image.load("image/metal_crate.png")
     @@woodenCrate_img = Image.load("image/wooden_crate.png")
@@ -38,7 +38,7 @@ class Level1
         @metalSprites = []
         @woodenSprites = []
         @spikeSprites = []
-        @playerTankSprite = PlayerTank.new(@@playerTank_img)
+        @playerTank_sprite = PlayerTank.new(@@playerTank_img)
         @playerShoot = false
         @bullet_speed = 3
 
@@ -91,20 +91,35 @@ class Level1
         Sprite.draw(@metalSprites)
         Sprite.draw(@spikeSprites)
         
-        @playerTankSprite.draw
+        @playerTank_sprite.draw
     end
 
     def update
-        @playerTankSprite.move
+        @playerTank_sprite.move
 
-        Sprite.check(@playerTankSprite, @metalSprites, :coll_with_metal)
-        Sprite.check(@playerTankSprite, @woodenSprites, nil) # Hit method of WoodenSprite is called
-        Sprite.check(@playerTankSprite, @spikeSprites, nil) # Hit method of spikeSprite is called
+        Sprite.check(@playerTank_sprite, @metalSprites, :coll_with_metal)
+        Sprite.check(@playerTank_sprite, @woodenSprites, nil) # Hit method of WoodenSprite is called
+        Sprite.check(@playerTank_sprite, @spikeSprites, nil) # Hit method of spikeSprite is called
 
         if Input.key_push?(K_SPACE)
-            @bullet_x = @playerTankSprite.x + @@playerTank_img.width + 2
-            @bullet_y = @playerTankSprite.y + @@playerTank_img.height / 2
-            @bullet_angle = @playerTankSprite.angle
+            @tankShooting_angle = @playerTank_sprite.angle
+            
+            # Setting the bullet pos
+            case(@tankShooting_angle)
+            when 0
+                @bullet_x = @playerTank_sprite.x + @@playerTank_img.width + 2
+                @bullet_y = @playerTank_sprite.y + @@playerTank_img.height / 2
+            when 90
+                @bullet_x = @playerTank_sprite.x + @@playerTank_img.width / 2
+                @bullet_y = @playerTank_sprite.y + @@playerTank_img.height + 2
+            when -90
+                @bullet_x = @playerTank_sprite.x + @@playerTank_img.width / 2
+                @bullet_y = @playerTank_sprite.y - 2
+            when 180
+                @bullet_x = @playerTank_sprite.x - 2
+                @bullet_y = @playerTank_sprite.y + @@playerTank_img.height / 2
+            end
+
             @playerShoot = true
         end
 
@@ -115,15 +130,13 @@ class Level1
     end
 
     def shoot_bullet
-        puts "Shooting"
         @bulletSprite = Bullet.new(@bullet_x, @bullet_y, Image.load("image/bullet_l1.png"))
+        @bulletSprite.angle=(@tankShooting_angle)
         @bulletSprite.draw
 
-        case(@bullet_angle)
+        case(@tankShooting_angle)
         when 0
-            puts @bullet_x
             @bullet_x += @bullet_speed
-            puts @bullet_x
         when 90
             @bullet_y += @bullet_speed
         when 180
