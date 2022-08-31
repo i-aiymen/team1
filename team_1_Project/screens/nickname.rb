@@ -7,7 +7,8 @@ class Nickname
     @@textBox.box_fill(0, 0, 231, 0.5, [200, 0, 0, 0])
 
     def initialize
-        @@backButton = Sprite.new(13,17, Image.load('image/back.png'))       
+        @@backButton = Sprite.new(13,17, Image.load('image/back.png'))
+        @@playGameButton = Sprite.new(344,457, Image.load('image/playGame.png'))
     end
 
     
@@ -45,6 +46,6 @@ class Nickname
         Window.draw_font(240, 288, nickName, Font.new(25),{:color => C_BLACK})
         Window.draw_font(295, 336, "Active:", Font.new(20),{:color => C_BLACK})
         Window.draw_font(350, 336, ((caseType == 0)? "lowercase" : "uppercase"), Font.new(20),{:color => [255,164,47,68]})
-        Sprite.draw([@@backButton])
+        Sprite.draw([@@backButton,@@playGameButton])
     end
 end
