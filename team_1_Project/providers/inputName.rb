@@ -2,6 +2,24 @@ class NicknameInput
     @@name = ''
     @@caseType = 0  # 0 => lowercase and 1=> uppercase
   
+    def self.nameInput
+
+      #Special characters
+      if Input.key_push?(K_BACKSPACE)
+        if @@name.size != 0
+          @@name.chop!
+        end
+      end
+      if Input.key_push?(K_RETURN)
+        $player.name= @@name
+        @@name = ""
+        return 1, @@name, @@caseType
+      end
+      if Input.key_push?(K_SPACE) 
+        @@caseType += 1
+        @@caseType %= 2
+      end
+  
       #Normal character
       if @@name.size <= 33
         if Input.key_push?(K_A)
