@@ -7,6 +7,8 @@ class Home
         @@playButton = Sprite.new(290,372, Image.load('image/play.png'))
         @@settingsButton = Sprite.new(13,17, Image.load('image/settings.png'))
         @@rulesButton = Sprite.new(13,80, Image.load('image/rules.png'))
+        @@musicButton = Sprite.new(660,17, Image.load('image/music.png'))
+        @@exitButton = Sprite.new(660,80, Image.load('image/exit.png'))
     end
 
     
@@ -28,6 +30,6 @@ class Home
         # update(x, y)
         Window.draw(0, 0, @@backgroundImage)
         Window.draw(212,241,@@gameNameText)
-        Sprite.draw([@@playButton,@@settingsButton,@@rulesButton])
+        Sprite.draw([@@playButton,@@settingsButton,@@rulesButton,@@musicButton,@@exitButton])
     end
 end
