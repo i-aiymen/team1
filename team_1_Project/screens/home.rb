@@ -13,7 +13,7 @@ class Home
     
 
     def update(x, y)
-        m = Sprite.new(x, y, Image.new(1, 1, C_RED))
+        m = Sprite.new(x, y, Image.new(1, 1, C_BLACK))
         if m === @@playButton
             @@playButton = Sprite.new(290,372, Image.load('image/playHover.png'))
         end

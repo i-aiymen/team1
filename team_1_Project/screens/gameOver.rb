@@ -10,7 +10,7 @@ class GameOver
     
 
     def update(x, y)
-        m = Sprite.new(x, y, Image.new(1, 1, C_RED))
+        m = Sprite.new(x, y, Image.new(1, 1, C_BLACK))
         if m === @@homeButton
             @@homeButton = Sprite.new(290,380, Image.load('image/homeHover.png'))
         end
