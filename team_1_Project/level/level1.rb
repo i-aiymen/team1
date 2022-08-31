@@ -144,6 +144,11 @@ class Level1
         when -90
             @bullet_y -= @bullet_speed
         end
-        
+
+        # Collision with other sprites
+        if Sprite.check(@bulletSprite, @metalSprites) || Sprite.check(@bulletSprite, @woodenSprites) || Sprite.check(@bulletSprite, @spikeSprites, nil, :hit_bullet)
+            @playerShoot = false
+        end
+
     end
 end

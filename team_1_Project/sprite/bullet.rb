@@ -20,4 +20,8 @@ class Bullet < Sprite
         end
 
     end
+
+    def shot
+        
+    end
 end
