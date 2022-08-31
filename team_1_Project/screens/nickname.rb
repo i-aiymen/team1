@@ -1,15 +1,12 @@
 class Nickname
     @@backgroundImage = Image.load('image/background.png')
     @@secondaryBackground = Image.load('image/secondaryBackground.png')
+    @@nicknameText = Image.load('image/nickName_text.png')
     
 
-    # def initialize
-    #     @@playButton = Sprite.new(290,372, Image.load('image/play.png'))
-    #     @@settingsButton = Sprite.new(13,17, Image.load('image/settings.png'))
-    #     @@rulesButton = Sprite.new(13,80, Image.load('image/rules.png'))
-    #     @@musicButton = Sprite.new(660,17, Image.load('image/music.png'))
-    #     @@exitButton = Sprite.new(660,80, Image.load('image/exit.png'))
-    # end
+    def initialize
+        @@backButton = Sprite.new(13,17, Image.load('image/back.png'))
+    end
 
     
 
@@ -39,7 +36,8 @@ class Nickname
         # update(x, y)
         Window.draw(0, 0, @@backgroundImage)
         Window.draw(165, 143, @@secondaryBackground)
-        # Window.draw(212,241,@@gameNameText)
-        # Sprite.draw([@@playButton,@@settingsButton,@@rulesButton,@@musicButton,@@exitButton])
+        Window.draw(228,165,@@nicknameText)
+        Window.draw_font(255, 220, "(press Shift to toggle Case)", Font.new(20),{:color => C_BLACK})
+        Sprite.draw([@@backButton])
     end
 end
