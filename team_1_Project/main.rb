@@ -29,7 +29,7 @@ Window.loop do
     # a = GameOver.new
     # a.draw
 
-    a = ChangeAvatar.new
+    a = Level2.new
     a.draw
 
 end
