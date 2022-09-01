@@ -1,11 +1,42 @@
 class Level2
+
+    @@playerX = 60
+    @@playerY = 531
+    @@enemyX = 590
+    @@enemyY = 51
+    @@playerDirection = 0
+
     @@backgroundImageLvl2 = Image.load('image/backgroundLvl2.png')
     @@playerImage = Image.load('image/playerYoru.png')
     @@enemyImage = Image.load('image/enemyRobot.png')
 
+    def self.playerMovement
+        if Input.key_push?(K_W) && @@playerY >= 10
+            @@playerY -= 10
+            @@playerDirection = 0
+        end
+        if Input.key_push?(K_A) && @@playerX >= 10
+            @@playerX -= 10
+            @@playerDirection = 3
+        end
+        if Input.key_push?(K_S) && @@playerY <= 600 - 10 - 75
+            @@playerY += 10
+            @@playerDirection = 2
+        end
+        if Input.key_push?(K_D) && @@playerX <= 600 - 10 - 75
+            @@playerX += 10
+            @@playerDirection = 1
+        end
+    end
+
+    def self.movements()
+        Level2.playerMovement
+    end
+
     def draw
         Window.draw(0, 0, @@backgroundImageLvl2)
-        Window.draw(60, 531, @@playerImage)
-        Window.draw(590, 51, @@enemyImage)
+        Window.draw(@@playerX, @@playerY, @@playerImage)
+        Window.draw(@@enemyX, @@enemyY, @@enemyImage)
+        Level2.movements
     end
 end
