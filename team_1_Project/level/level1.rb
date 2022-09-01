@@ -138,7 +138,7 @@ class Level1
         Sprite.check(@enemyTank_sprites, @woodenSprites, :shot_sprites, nil)
         Sprite.check(@enemyTank_sprites, @spikeSprites, :shot_sprites, nil)
 
-        if Input.key_push?(K_SPACE)
+        if Input.key_push?(K_SPACE) && !@playerShoot
             @tankShooting_angle = @playerTank_sprite.angle
             
             # Setting the bullet pos
@@ -182,8 +182,6 @@ class Level1
             @explosion_x = @bullet_x
             @explosion_y = @bullet_y
             @explosion_timer = @explosion_maxTime
-
-            
         end
 
         case(@tankShooting_angle)
@@ -195,6 +193,13 @@ class Level1
             @bullet_x -= @bullet_speed
         when -90
             @bullet_y -= @bullet_speed
+        end
+
+
+        if (@bullet_x <= 0 || @bullet_x >= Window.width) ||
+            (@bullet_y <= 0 || @bullet_y >= Window.height)
+            puts "Player can shoot now --------------------------"
+            @playerShoot = false
         end
     end
 
