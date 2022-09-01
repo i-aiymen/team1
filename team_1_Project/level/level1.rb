@@ -282,6 +282,10 @@ class Level1
          # Collision with other sprites
         if Sprite.check(enemyBullet_sprite, @metalSprites) || Sprite.check(enemyBullet_sprite, @woodenSprites) || Sprite.check(enemyBullet_sprite, @spikeSprites,:shot ,:hit_bullet) || Sprite.check(enemyBullet_sprite, @playerTank_sprite, :shot, :decreaseCurrentHP)
             @enemyBullet_posArr[idx][3] = 0
+            @explodeBullet = true
+            @explosion_x = @enemyBullet_posArr[idx][0] 
+            @explosion_y = @enemyBullet_posArr[idx][1] 
+            @explosion_timer = @explosion_maxTime
         end
         
 
