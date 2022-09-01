@@ -138,6 +138,7 @@ class Level1
         Sprite.check(@enemyTank_sprites, @woodenSprites, :shot_sprites, nil)
         Sprite.check(@enemyTank_sprites, @spikeSprites, :shot_sprites, nil)
 
+        # Checking if the player hits SPACE key to shoot
         if Input.key_push?(K_SPACE) && !@playerShoot
             @tankShooting_angle = @playerTank_sprite.angle
             
@@ -201,6 +202,10 @@ class Level1
             puts "Player can shoot now --------------------------"
             @playerShoot = false
         end
+    end
+
+    def enemy_shootBullet
+
     end
 
     def show_explosion
