@@ -150,4 +150,9 @@ class EnemyTank < Sprite
 
         # puts "Angle of Rotation : #{self.angle}, x : #{self.x}, y : #{self.y}"
     end
+
+    def hit_bullet
+        puts "BULLET COLLIDED WITH ENEMYTANK"
+        self.vanish
+    end
 end

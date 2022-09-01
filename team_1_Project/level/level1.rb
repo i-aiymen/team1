@@ -101,7 +101,7 @@ class Level1
 
     def update
         @playerTank_sprite.move
-        @enemyTank_sprite.move
+        # @enemyTank_sprite.move
 
         Sprite.check(@playerTank_sprite, @metalSprites, :coll_with_metal)
         Sprite.check(@playerTank_sprite, @woodenSprites, nil) # Hit method of WoodenSprite is called
@@ -152,7 +152,7 @@ class Level1
         end
 
         # Collision with other sprites
-        if Sprite.check(@bulletSprite, @metalSprites, :showExplosion) || Sprite.check(@bulletSprite, @woodenSprites) || Sprite.check(@bulletSprite, @spikeSprites, :showExplosion, :hit_bullet)
+        if Sprite.check(@bulletSprite, @metalSprites, :showExplosion) || Sprite.check(@bulletSprite, @woodenSprites) || Sprite.check(@bulletSprite, @spikeSprites, :showExplosion, :hit_bullet) || Sprite.check(@bulletSprite, @enemyTank_sprite, nil, :hit_bullet)
             @playerShoot = false # To stop the bullet movement after collision
         end
 
