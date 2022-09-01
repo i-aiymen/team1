@@ -21,7 +21,7 @@ class Level1
     @woodenSprites
     @spikeSprites
     @playerTank_sprite
-    @enemyTank_sprite
+    @enemyTank_sprites
     @bulletSprite
     @playerShoot
     @bullet_x
