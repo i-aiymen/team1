@@ -34,6 +34,14 @@ class Level1
     @explosion_maxTime
     @explosion_timer
 
+    @enemyShooting_offset
+    @enemyShooting_timer
+    @enemyBullet_x
+    @enemyBullet_y
+    
+    @enemyTankShoot
+    @enemyBullet_posArr
+
     @@metalCrate_img = Image.load("image/metal_crate.png")
     @@woodenCrate_img = Image.load("image/wooden_crate.png")
     @@spike_img = Image.load("image/spike.png")
@@ -48,6 +56,8 @@ class Level1
 
 
     def initialize
+        height = 4
+        width = 3
         @metalSprites = []
         @woodenSprites = []
         @spikeSprites = []
@@ -55,6 +65,8 @@ class Level1
         @playerTank_sprite = PlayerTank.new(@@playerTank_img)
         @explosion_maxTime = 20
         @explosion_timer = 0
+        @enemyShooting_offset = 600
+        @enemyShooting_timer = @enemyShooting_offset
         
         2.times do 
             @enemyTank_sprites << EnemyTank.new(rand(90 .. 540),rand(95 .. 150),@@enemyTank_img)
@@ -65,6 +77,8 @@ class Level1
         end
 
         @playerShoot = false
+        @enemyTankShoot = false
+        @enemyBullet_posArr = Array.new(height){Array.new(width)}
         @explodeBullet = false
         @bullet_speed = 3
 
@@ -131,12 +145,66 @@ class Level1
             enemyTank.move
         end
 
+        # Start the enemy shooting timer
+        @enemyShooting_timer-=1
+
+        puts "Enemy Shooting in #{@enemyShooting_timer/60}"
+
         Sprite.check(@playerTank_sprite, @metalSprites, :coll_with_metal)
         Sprite.check(@playerTank_sprite, @woodenSprites, nil) # Hit method of WoodenSprite is called
         Sprite.check(@playerTank_sprite, @spikeSprites, nil) # Hit method of spikeSprite is called
         Sprite.check(@enemyTank_sprites, @metalSprites, :shot_sprites, nil)
         Sprite.check(@enemyTank_sprites, @woodenSprites, :shot_sprites, nil)
         Sprite.check(@enemyTank_sprites, @spikeSprites, :shot_sprites, nil)
+
+        # Checking if the enemies are ready to shoot
+        if @enemyShooting_timer / 60 == 1
+
+            idx = 0
+            # Creating @enemyBullet_posArr
+            @enemyTank_sprites.each do |enemyTank_sprite|
+                if @enemyTankShoot && @enemyBullet_posArr[idx][3] == 0
+                    next
+                end
+                # Setting the bullet pos
+                case(enemyTank_sprite.angle)
+                when 0
+                    @enemyBullet_posArr[idx][0] = enemyTank_sprite.x + @@enemyTank_img.width + 2
+                    @enemyBullet_posArr[idx][1] = enemyTank_sprite.y + @@enemyTank_img.height / 2
+                when 90
+                    @enemyBullet_posArr[idx][0] = enemyTank_sprite.x + @@enemyTank_img.width / 2
+                    @enemyBullet_posArr[idx][1] = enemyTank_sprite.y + @@enemyTank_img.height + 2
+                when -90
+                    @enemyBullet_posArr[idx][0] = enemyTank_sprite.x + @@enemyTank_img.width / 2
+                    @enemyBullet_posArr[idx][1] = enemyTank_sprite.y - 2
+                when 180
+                    @enemyBullet_posArr[idx][0] = enemyTank_sprite.x - 2
+                    @enemyBullet_posArr[idx][1] = enemyTank_sprite.y + @@enemyTank_img.height / 2
+                end
+
+                @enemyBullet_posArr[idx][2] = enemyTank_sprite.angle
+                @enemyBullet_posArr[idx][3] = 1
+                idx+=1
+            end
+            
+            @enemyTankShoot = true
+            @enemyShooting_timer = @enemyShooting_offset
+        end
+
+        if @enemyTankShoot
+            idx = 0
+            @enemyBullet_posArr.each do |pos|
+                puts "x : #{pos[0]}, y : #{pos[1]}, perm : #{pos[3]}"
+                if pos[3] == 1
+                    puts "x : #{pos[0]}, y : #{pos[1]}, perm : #{pos[3]}"
+                    self.enemy_shootBullet(idx)
+                end
+                idx+=1
+            end
+        else
+            puts "Shooooting OVERRrrrrrrrrrrrrrrrr"
+        end
+
 
         # Checking if the player hits SPACE key to shoot
         if Input.key_push?(K_SPACE) && !@playerShoot
@@ -167,6 +235,7 @@ class Level1
 
         if @explodeBullet
             self.show_explosion
+            Sprite.clean(@enemyTank_sprites)
         end
 
     end
@@ -177,7 +246,7 @@ class Level1
         @bulletSprite.draw
 
          # Collision with other sprites
-         if Sprite.check(@bulletSprite, @metalSprites, :showExplosion) || Sprite.check(@bulletSprite, @woodenSprites) || Sprite.check(@bulletSprite, @spikeSprites, :showExplosion, :hit_bullet) || Sprite.check(@bulletSprite, @enemyTank_sprites, nil, :hit_bullet)
+         if Sprite.check(@bulletSprite, @metalSprites, :showExplosion) || Sprite.check(@bulletSprite, @woodenSprites) || Sprite.check(@bulletSprite, @spikeSprites, :showExplosion, :hit_bullet) || (Sprite.check(@bulletSprite, @enemyTank_sprites, nil, :hit_bullet))
             @playerShoot = false # To stop the bullet movement after collision
             @explodeBullet = true
             @explosion_x = @bullet_x
@@ -204,8 +273,31 @@ class Level1
         end
     end
 
-    def enemy_shootBullet
+    def enemy_shootBullet(idx)
 
+        enemyBullet_sprite = Bullet.new(@enemyBullet_posArr[idx][0], @enemyBullet_posArr[idx][1], Image.load("image/bullet_l1.png"))
+        enemyBullet_sprite.angle=(@enemyBullet_posArr[idx][2])
+        enemyBullet_sprite.draw
+
+         # Collision with other sprites
+        if Sprite.check(enemyBullet_sprite, @metalSprites) || Sprite.check(enemyBullet_sprite, @woodenSprites) || Sprite.check(enemyBullet_sprite, @spikeSprites,:shot ,:hit_bullet) || Sprite.check(enemyBullet_sprite, @playerTank_sprite, :shot, :hit_bullet)
+            
+        end
+        
+
+        puts "Size of array : #{@enemyBullet_posArr.size}"
+
+
+        case(@enemyBullet_posArr[idx][2])
+        when 0
+            @enemyBullet_posArr[idx][0] += @bullet_speed
+        when 90
+            @enemyBullet_posArr[idx][1] += @bullet_speed
+        when 180
+            @enemyBullet_posArr[idx][0] -= @bullet_speed
+        when -90
+            @enemyBullet_posArr[idx][1] -= @bullet_speed
+        end
     end
 
     def show_explosion

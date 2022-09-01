@@ -99,4 +99,9 @@ class PlayerTank < Sprite
     def returnBulletPos
 
     end
+
+
+    def hit_bullet
+        self.vanish
+    end
 end

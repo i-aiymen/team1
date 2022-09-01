@@ -18,7 +18,6 @@ class Bullet < Sprite
         when -90
             self.y -= @speed
         end
-
     end
 
     def showExplosion
@@ -41,5 +40,9 @@ class Bullet < Sprite
         #     timer-=1
         # end
 
+    end
+
+    def shot
+        self.vanish
     end
 end
