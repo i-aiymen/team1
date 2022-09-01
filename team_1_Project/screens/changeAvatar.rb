@@ -3,9 +3,11 @@ class ChangeAvatar
     @@secondaryBackground = Image.load('image/secondaryBackground2.png')
     @@settingsText = Image.load('image/settings_text.png')
 
-    # def initialize
-    #     @@changeButton = Sprite.new(277,334, Image.load('image/change.png'))
-    # end
+    def initialize
+        @@avatarNameButton1 = Sprite.new(118,444, Image.load('image/avatarName1.png'))
+        @@avatarNameButton2 = Sprite.new(291,444, Image.load('image/avatarName2.png'))
+        @@avatarNameButton3 = Sprite.new(464,444, Image.load('image/avatarName3.png'))
+    end
 
     
 
@@ -24,6 +26,6 @@ class ChangeAvatar
         Window.draw(0, 0, @@backgroundImage)
         Window.draw(36, 42, @@secondaryBackground)
         Window.draw(199,65,@@settingsText)
-        #Sprite.draw([@@changeButton])
+        Sprite.draw([@@avatarNameButton1,@@avatarNameButton2,@@avatarNameButton3])
     end
 end
