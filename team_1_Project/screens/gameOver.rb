@@ -1,13 +1,32 @@
+require 'dxruby'
 class GameOver
     @@backgroundImage = Image.load('image/background.png')
-    @@homeButton = Image.load('image/home.png')
-    @@replayButton = Image.load('image/replay.png')
     @@gameoverText = Image.load('image/gameover_text.png')
 
-    def self.draw
+    def initialize
+        @@homeButton = Sprite.new(290,380, Image.load('image/home.png'))
+        @@replayButton = Sprite.new(370,380, Image.load('image/replay.png'))
+    end
+
+    
+
+    def update(x, y)
+        m = Sprite.new(x, y, Image.new(1, 1, C_RED))
+        if m === @@homeButton
+            @@homeButton = Sprite.new(290,380, Image.load('image/homeHover.png'))
+        end
+        if m === @@replayButton
+            @@replayButton = Sprite.new(370,380, Image.load('image/replayHover.png'))
+        end
+    end
+
+    def draw
+        x = Input.mouse_pos_x
+        y = Input.mouse_pos_y
+
+        update(x, y)
         Window.draw(0, 0, @@backgroundImage)
         Window.draw(162,227,@@gameoverText)
-        Window.draw(290,380,@@homeButton)
-        Window.draw(370,380,@@replayButton)
+        Sprite.draw([@@homeButton,@@replayButton])
     end
 end
