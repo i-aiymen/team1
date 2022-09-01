@@ -18,7 +18,7 @@ class EnemyTank < Sprite
         @img_height = image.height
         @movingStatus = true
         @currentPosX = 600
-        @currentPosY = 230
+        @currentPosY = 270
         @isPotrait = false
         @movementAtColl_x = 0
         @movementAtColl_y = 0
@@ -156,5 +156,9 @@ class EnemyTank < Sprite
     def hit_bullet
         puts "BULLET COLLIDED WITH ENEMYTANK"
         self.vanish
+    end
+
+    def shot_sprites
+        @changeDirection = true
     end
 end

@@ -106,6 +106,9 @@ class Level1
         Sprite.check(@playerTank_sprite, @metalSprites, :coll_with_metal)
         Sprite.check(@playerTank_sprite, @woodenSprites, nil) # Hit method of WoodenSprite is called
         Sprite.check(@playerTank_sprite, @spikeSprites, nil) # Hit method of spikeSprite is called
+        Sprite.check(@enemyTank_sprite, @metalSprites, :shot_sprites, nil)
+        Sprite.check(@enemyTank_sprite, @woodenSprites, :shot_sprites, nil)
+        Sprite.check(@enemyTank_sprite, @spikeSprites, :shot_sprites, nil)
 
         if Input.key_push?(K_SPACE)
             @tankShooting_angle = @playerTank_sprite.angle
