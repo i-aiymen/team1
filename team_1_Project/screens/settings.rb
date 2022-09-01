@@ -5,30 +5,27 @@ class Settings
     @@avatarText = Image.load('image/avatar_text.png')
 
     def initialize
-        @@changeButton = Sprite.new(286,334, Image.load('image/change.png'))
+        @@changeButton = Sprite.new(277,334, Image.load('image/change.png'))
     end
 
     
 
-    # def update(x, y)
-    #     m = Sprite.new(x, y, Image.new(1, 1, C_BLACK))
-    #     if m === @@backButton
-    #         @@backButton = Sprite.new(13,17, Image.load('image/backHover.png'))
-    #     end
-    #     if m === @@playGameButton
-    #         @@playGameButton = Sprite.new(344,457, Image.load('image/playGameHover.png'))
-    #     end
-    # end
+    def update(x, y)
+        m = Sprite.new(x, y, Image.new(1, 1, C_BLACK))
+        if m === @@changeButton
+            @@changeButton = Sprite.new(277,334, Image.load('image/changeHover.png'))
+        end
+    end
 
     def draw
-        # x = Input.mouse_pos_x
-        # y = Input.mouse_pos_y
+        x = Input.mouse_pos_x
+        y = Input.mouse_pos_y
 
-        # update(x, y)
+        update(x, y)
         Window.draw(0, 0, @@backgroundImage)
         Window.draw(36, 42, @@secondaryBackground)
         Window.draw(199,65,@@settingsText)
-        Window.draw(270,282,@@avatarText)
+        Window.draw(264,282,@@avatarText)
         # flag, nickName, caseType = NicknameInput.nameInput
         # Window.draw_font(255, 220, "(press Space to toggle Case)", Font.new(20),{:color => C_BLACK})
         # Window.draw(240,280,@@textBox)
