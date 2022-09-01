@@ -3,7 +3,7 @@ class Spike < Sprite
         super(x,y,img)
     end
 
-    def hit_bullet
+    def hit_bullet_player
         # Vanish the spike after colliding with the bullet
         self.vanish
     end

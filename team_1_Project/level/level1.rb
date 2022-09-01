@@ -246,7 +246,7 @@ class Level1
         @bulletSprite.draw
 
          # Collision with other sprites
-         if Sprite.check(@bulletSprite, @metalSprites, :showExplosion) || Sprite.check(@bulletSprite, @woodenSprites) || Sprite.check(@bulletSprite, @spikeSprites, :showExplosion, :hit_bullet) || (Sprite.check(@bulletSprite, @enemyTank_sprites, nil, :hit_bullet))
+         if Sprite.check(@bulletSprite, @metalSprites, :showExplosion) || Sprite.check(@bulletSprite, @woodenSprites, nil, :hit_bullet_player) || Sprite.check(@bulletSprite, @spikeSprites, :showExplosion, :hit_bullet_player) || (Sprite.check(@bulletSprite, @enemyTank_sprites, nil, :hit_bullet))
             @playerShoot = false # To stop the bullet movement after collision
             @explodeBullet = true
             @explosion_x = @bullet_x
