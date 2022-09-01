@@ -23,7 +23,7 @@ class EnemyTank < Sprite
         @movementAtColl_x = 0
         @movementAtColl_y = 0
         @movementOffset = 0
-        @movementMax = 100
+        @movementMax = 200
         @changeDirection = false
 
         super(@currentPosX,@currentPosY,image)
