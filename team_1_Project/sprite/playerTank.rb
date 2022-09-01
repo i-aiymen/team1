@@ -7,6 +7,8 @@ class PlayerTank < Sprite
     @isPotrait
     @movementAtColl_x # Contains the input.x at the time of collision
     @movementAtColl_y # Contains the input.x at the time of collision
+    @hp_current
+    @hp_max
 
     def initialize(image)
         @img_width = image.width
@@ -17,6 +19,8 @@ class PlayerTank < Sprite
         @isPotrait = false
         @movementAtColl_x = 0
         @movementAtColl_y = 0
+        @hp_max = 20
+        @hp_current = @hp_max
         super(@currentPosX,@currentPosY,image)
     end
 
@@ -100,8 +104,12 @@ class PlayerTank < Sprite
 
     end
 
+    def getCurrentHP
+        return @hp_current
+    end
 
-    def hit_bullet
+    def decreaseCurrentHP
+        # @hp_current -= 5
         self.vanish
     end
 end

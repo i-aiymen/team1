@@ -42,6 +42,7 @@ class Level1
     @enemyTankShoot
     @enemyBullet_posArr
 
+    @@font_32 = Font.new(32)
     @@metalCrate_img = Image.load("image/metal_crate.png")
     @@woodenCrate_img = Image.load("image/wooden_crate.png")
     @@spike_img = Image.load("image/spike.png")
@@ -137,6 +138,8 @@ class Level1
         
         Sprite.draw(@enemyTank_sprites)
         @playerTank_sprite.draw
+
+        Window.draw_font(0, 300, "HP : #{@playerTank_sprite.getCurrentHP}", @@font_32, {color: C_BLACK})
     end
 
     def update
@@ -163,9 +166,6 @@ class Level1
             idx = 0
             # Creating @enemyBullet_posArr
             @enemyTank_sprites.each do |enemyTank_sprite|
-                if @enemyTankShoot && @enemyBullet_posArr[idx][3] == 0
-                    next
-                end
                 # Setting the bullet pos
                 case(enemyTank_sprite.angle)
                 when 0
@@ -280,8 +280,8 @@ class Level1
         enemyBullet_sprite.draw
 
          # Collision with other sprites
-        if Sprite.check(enemyBullet_sprite, @metalSprites) || Sprite.check(enemyBullet_sprite, @woodenSprites) || Sprite.check(enemyBullet_sprite, @spikeSprites,:shot ,:hit_bullet) || Sprite.check(enemyBullet_sprite, @playerTank_sprite, :shot, :hit_bullet)
-            
+        if Sprite.check(enemyBullet_sprite, @metalSprites) || Sprite.check(enemyBullet_sprite, @woodenSprites) || Sprite.check(enemyBullet_sprite, @spikeSprites,:shot ,:hit_bullet) || Sprite.check(enemyBullet_sprite, @playerTank_sprite, :shot, :decreaseCurrentHP)
+            @enemyBullet_posArr[idx][3] = 0
         end
         
 
