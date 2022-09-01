@@ -22,8 +22,14 @@ class ChangeAvatar
         if m === @@avatarNameButton2
             @@avatarNameButton2 = Sprite.new(291,444, Image.load('image/avatarName2Hover.png'))
         end
-        if m === @@avatarNameButton3
-            @@avatarNameButton3 = Sprite.new(464,444, Image.load('image/avatarName3Hover.png'))
+        if m === @@avatar1
+            @@avatar1 = Sprite.new(135,228, Image.load('image/yoruAvatarHover.png'))
+        end
+        if m === @@avatar2
+            @@avatar2 = Sprite.new(296,214, Image.load('image/skyAvatarHover.png'))
+        end
+        if m === @@avatar3
+            @@avatar3 = Sprite.new(479,214, Image.load('image/knightAvatarHover.png'))
         end
     end
 
