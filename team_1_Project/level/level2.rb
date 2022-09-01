@@ -27,6 +27,14 @@ class Level2
             @@playerX += 10
             @@playerDirection = 1
         end
+        if Input.key_push?(K_J) && $player.mp >= 5
+            @@playerBullets.push([@@playerX, @@playerY, @@playerDirection])
+            $player.mp = $player.mp - 5
+        end
+        if Input.key_push?(K_K) && $player.mp >= 7
+            @@playerSplBullets.push([@@playerX, @@playerY, 250])
+            $player.mp = $player.mp - 7
+        end
     end
 
     def self.movements()
