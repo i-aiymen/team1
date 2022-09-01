@@ -6,6 +6,7 @@ class Level2
     @@enemyY = 51
     @@playerDirection = 0
     @@playerBullets = []
+    @@playerSplBullets = []
     @@enemyData = Enemy.new(30,10)
 
     @@backgroundImageLvl2 = Image.load('image/backgroundLvl2.png')
@@ -60,6 +61,27 @@ class Level2
                   num += 1
             end
         end
+
+        num = 0
+        @@playerSplBullets.size.times do |i|
+            ch = i - num
+            if @@playerSplBullets[ch][0] > @@enemyX
+                @@playerSplBullets[ch][0] -= [(1 / 2).ceil, 1].max
+            elsif @@playerSplBullets[ch][0] < @@enemyX
+                @@playerSplBullets[ch][0] += [(1 / 2).ceil, 1].max
+            end
+            if @@playerSplBullets[ch][1] > @@enemyY
+                @@playerSplBullets[ch][1] -= [(1 / 2).ceil, 1].max
+            elsif @@playerSplBullets[ch][1] < @@enemyY
+                @@playerSplBullets[ch][1] += [(1 / 2).ceil, 1].max
+            end
+
+            @@playerSplBullets[ch][2] -= 1
+            if @@playerSplBullets[ch][2] <= 0
+                @@playerSplBullets.delete_at(ch)
+                num += 1
+            end
+        end
     end
 
     def self.movements(enemy_data)
@@ -87,10 +109,12 @@ class Level2
     end
 
     def self.draw
-        Level2.movements(@@enemyData)
-        Window.draw(0, 0, @@backgroundImageLvl2)
         @@playerImage = Image.load("image/playerYoru#{@@playerDirection}.png")
         @@playerBulletImage = Image.load("image/playerBulletImage#{@@playerDirection}.png")
+        @@playerSplBulletImage = Image.load('image/playerSplBulletImage.png')
+
+        Level2.movements(@@enemyData)
+        Window.draw(0, 0, @@backgroundImageLvl2) 
         Window.draw(@@playerX, @@playerY, @@playerImage)
         if !Level2.die?(@@enemyData, 1)
             Window.draw(@@enemyX, @@enemyY, @@enemyImage)
@@ -98,6 +122,10 @@ class Level2
 
         @@playerBullets.size.times do |i|
             Window.draw(@@playerBullets[i][0], @@playerBullets[i][1], @@playerBulletImage)
+        end
+
+        @@playerSplBullets.size.times do |i|
+            Window.draw(@@playerSplBullets[i][0], @@playerSplBullets[i][1], @@playerSplBulletImage)
         end
         
     end
