@@ -109,7 +109,10 @@ class PlayerTank < Sprite
     end
 
     def decreaseCurrentHP
-        # @hp_current -= 5
-        self.vanish
+        @hp_current -= 5
+
+        if @hp_current == 0
+            self.vanish
+        end
     end
 end
