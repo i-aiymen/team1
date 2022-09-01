@@ -44,7 +44,7 @@ class Level1
         @playerTank_sprite = PlayerTank.new(@@playerTank_img)
         
         2.times do 
-            @enemyTank_sprites << EnemyTank.new(rand(80 .. 540),rand(95 .. 150),@@enemyTank_img)
+            @enemyTank_sprites << EnemyTank.new(rand(90 .. 540),rand(95 .. 150),@@enemyTank_img)
         end
 
         2.times do 

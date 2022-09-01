@@ -138,8 +138,8 @@ class EnemyTank < Sprite
         puts "i_x : #{i_x}, i_y : #{i_y}, angle : #{self.angle}, img width : #{@img_width}"
 
         
-        if  !(((self.x + i_x) >= 0 && (self.x + i_x) <= (Window.width - 100)) && 
-            ((self.y + i_y) >= 0 && (self.y + i_y) <= (Window.height - 100)))
+        if  !(((self.x + i_x) >= 90 && (self.x + i_x) <= (540)) && 
+            ((self.y + i_y) >= 95 && (self.y + i_y) <= (505)))
             @changeDirection = true
         end
         
