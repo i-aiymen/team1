@@ -43,11 +43,31 @@ class Level2
         @@enemyX, @@enemyY = @@enemyData.move(@@enemyX, @@enemyY)
     end
 
+    def self.die?(enemy_data, num)
+        if num == 0
+            # player alive condition
+            if $player.hp <= 0
+                return true
+            else
+                return false
+            end
+        else
+            # enemy alive condition
+            if enemy_data.state["hp"] <= 0
+                return true
+            else
+                return false
+            end
+        end
+    end
+
     def self.draw
         Level2.movements(@@enemyData)
         Window.draw(0, 0, @@backgroundImageLvl2)
         Window.draw(@@playerX, @@playerY, @@playerImage)
-        Window.draw(@@enemyX, @@enemyY, @@enemyImage)
+        if !Level2.die?(@@enemyData, 1)
+            Window.draw(@@enemyX, @@enemyY, @@enemyImage)
+        end
         
     end
 end
