@@ -23,7 +23,7 @@ class EnemyTank < Sprite
         @movementAtColl_x = 0
         @movementAtColl_y = 0
         @movementOffset = 0
-        @movementMax = 5
+        @movementMax = 100
         @changeDirection = false
 
         super(@currentPosX,@currentPosY,image)
@@ -32,10 +32,9 @@ class EnemyTank < Sprite
     def move
 
         rotAngle = self.angle
-        changeDirection = false
 
         if (@movementOffset >= @movementMax)
-            changeDirection = true
+            @changeDirection = true
             @movementOffset = 0
         end
         
@@ -47,6 +46,7 @@ class EnemyTank < Sprite
                 i_y = 0
                 @movementOffset += 1
             else
+                puts "MAX UP ----------------"
                 mov = rand(-1..1)
                 while mov != 0
                     i_y = mov
@@ -101,7 +101,7 @@ class EnemyTank < Sprite
         # puts "mov_x = #{@movementAtColl_x}, mov_y = #{@movementAtColl_y}"
 
         if(@movingStatus == false && (i_x != @movementAtColl_x || i_y != @movementAtColl_y))
-            puts "movingStat : #{@movingStatus}"
+            # puts "movingStat : #{@movingStatus}"
             @movingStatus = true
         end
         # puts "movingStat : #{@movingStatus}"
@@ -112,7 +112,6 @@ class EnemyTank < Sprite
         end
 
         # Vertical Direction Change
-
         if @changeDirection
             case(i_y)
             when -1
@@ -135,6 +134,9 @@ class EnemyTank < Sprite
 
             @changeDirection = false
         end
+
+        puts "i_x : #{i_x}, i_y : #{i_y}, angle : #{self.angle}, img width : #{@img_width}"
+
         
         if  !(((self.x + i_x) >= 0 && (self.x + i_x) <= (Window.width - 100)) && 
             ((self.y + i_y) >= 0 && (self.y + i_y) <= (Window.height - 100)))

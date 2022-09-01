@@ -101,7 +101,7 @@ class Level1
 
     def update
         @playerTank_sprite.move
-        # @enemyTank_sprite.move
+        @enemyTank_sprite.move
 
         Sprite.check(@playerTank_sprite, @metalSprites, :coll_with_metal)
         Sprite.check(@playerTank_sprite, @woodenSprites, nil) # Hit method of WoodenSprite is called
