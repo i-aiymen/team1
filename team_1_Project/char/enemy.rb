@@ -23,7 +23,7 @@ class Enemy
         if @@time % 30 == 0
             boundaryArray = [] # screen boundary condition checking array
             4.times do |i|
-                if xDirection[i] * 30 + enemyX <= 525 && xDirection[i] * 30 + enemyX >= 0 && yDirection[i] * 30 + enemyY <= 525 && yDirection[i] * 30 + enemyY >= 0
+                if xDirection[i] * 30 + enemyX <= 615 && xDirection[i] * 30 + enemyX >= 0 && yDirection[i] * 30 + enemyY <= 615 && yDirection[i] * 30 + enemyY >= 0
                   boundaryArray.push(i)
                 end
             end

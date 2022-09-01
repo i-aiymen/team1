@@ -13,6 +13,7 @@ metalSprites, woodenSprites, spikeSprites = Level1.returnSprites # Array contain
 
 
 playerTank = PlayerTank.new
+$player = Player.new
 
 Window.loop do
     # Sprite.draw(metalSprites)
@@ -29,7 +30,6 @@ Window.loop do
     # a = GameOver.new
     # a.draw
 
-    a = Level2.new
-    a.draw
+    Level2.draw
 
 end

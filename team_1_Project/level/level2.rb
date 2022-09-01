@@ -5,6 +5,7 @@ class Level2
     @@enemyX = 590
     @@enemyY = 51
     @@playerDirection = 0
+    @@enemyData = Enemy.new(30,10)
 
     @@backgroundImageLvl2 = Image.load('image/backgroundLvl2.png')
     @@playerImage = Image.load('image/playerYoru.png')
@@ -37,14 +38,16 @@ class Level2
         end
     end
 
-    def self.movements()
+    def self.movements(enemy_data)
         Level2.playerMovement
+        @@enemyX, @@enemyY = @@enemyData.move(@@enemyX, @@enemyY)
     end
 
-    def draw
+    def self.draw
+        Level2.movements(@@enemyData)
         Window.draw(0, 0, @@backgroundImageLvl2)
         Window.draw(@@playerX, @@playerY, @@playerImage)
         Window.draw(@@enemyX, @@enemyY, @@enemyImage)
-        Level2.movements
+        
     end
 end
