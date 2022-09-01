@@ -13,7 +13,7 @@ class PlayerTank < Sprite
         @img_height = image.height
         @movingStatus = true
         @currentPosX = 0
-        @currentPosY = 230
+        @currentPosY = 270
         @isPotrait = false
         @movementAtColl_x = 0
         @movementAtColl_y = 0
@@ -97,6 +97,6 @@ class PlayerTank < Sprite
     end
 
     def returnBulletPos
-        
+
     end
 end

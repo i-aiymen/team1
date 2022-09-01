@@ -40,8 +40,17 @@ class Level1
         @metalSprites = []
         @woodenSprites = []
         @spikeSprites = []
+        @enemyTank_sprites = []
         @playerTank_sprite = PlayerTank.new(@@playerTank_img)
-        @enemyTank_sprite = EnemyTank.new(@@enemyTank_img)
+        
+        2.times do 
+            @enemyTank_sprites << EnemyTank.new(rand(80 .. 540),rand(95 .. 150),@@enemyTank_img)
+        end
+
+        2.times do 
+            @enemyTank_sprites << EnemyTank.new(rand(90 .. 540),rand(390 .. 505),@@enemyTank_img)
+        end
+
         @playerShoot = false
         @bullet_speed = 3
 
@@ -68,20 +77,23 @@ class Level1
                 when 1
                     @metalSprites << MetalCrate.new(j * 80, i * 75, @@metalCrate_img)
                     # Adding the sprite to the array
+                    puts "Metal : #{j * 80}, #{i * 75}"
         
                 when 2
                     @woodenSprites << WoodenCrate.new(j * 80, i * 75, @@woodenCrate_img)
+                    puts "Wooden : #{j * 80}, #{i * 75}"
                     
-        
+                    
                 when 3
                     @spikeSprites << Spike.new(j * 80, i * 75,  @@spike_img)
-                    puts "#{j * 80}, #{i * 75}"
-                     
-        
+                    puts "Spike Top : #{j * 80}, #{i * 75}"
+                    
+                    
                 when 4
                     spikeTopSprite =  Spike.new(j * 80, i * 75, @@spike_img)
                     spikeTopSprite.angle=(180)
-
+                    puts "Spike Down : #{j * 80}, #{i * 75}"
+                    
                     @spikeSprites << spikeTopSprite
                 end
             end
@@ -95,20 +107,22 @@ class Level1
         Sprite.draw(@metalSprites)
         Sprite.draw(@spikeSprites)
         
-        @enemyTank_sprite.draw
+        Sprite.draw(@enemyTank_sprites)
         @playerTank_sprite.draw
     end
 
     def update
         @playerTank_sprite.move
-        @enemyTank_sprite.move
+        @enemyTank_sprites.each do |enemyTank|
+            enemyTank.move
+        end
 
         Sprite.check(@playerTank_sprite, @metalSprites, :coll_with_metal)
         Sprite.check(@playerTank_sprite, @woodenSprites, nil) # Hit method of WoodenSprite is called
         Sprite.check(@playerTank_sprite, @spikeSprites, nil) # Hit method of spikeSprite is called
-        Sprite.check(@enemyTank_sprite, @metalSprites, :shot_sprites, nil)
-        Sprite.check(@enemyTank_sprite, @woodenSprites, :shot_sprites, nil)
-        Sprite.check(@enemyTank_sprite, @spikeSprites, :shot_sprites, nil)
+        Sprite.check(@enemyTank_sprites, @metalSprites, :shot_sprites, nil)
+        Sprite.check(@enemyTank_sprites, @woodenSprites, :shot_sprites, nil)
+        Sprite.check(@enemyTank_sprites, @spikeSprites, :shot_sprites, nil)
 
         if Input.key_push?(K_SPACE)
             @tankShooting_angle = @playerTank_sprite.angle
@@ -155,7 +169,7 @@ class Level1
         end
 
         # Collision with other sprites
-        if Sprite.check(@bulletSprite, @metalSprites, :showExplosion) || Sprite.check(@bulletSprite, @woodenSprites) || Sprite.check(@bulletSprite, @spikeSprites, :showExplosion, :hit_bullet) || Sprite.check(@bulletSprite, @enemyTank_sprite, nil, :hit_bullet)
+        if Sprite.check(@bulletSprite, @metalSprites, :showExplosion) || Sprite.check(@bulletSprite, @woodenSprites) || Sprite.check(@bulletSprite, @spikeSprites, :showExplosion, :hit_bullet) || Sprite.check(@bulletSprite, @enemyTank_sprites, nil, :hit_bullet)
             @playerShoot = false # To stop the bullet movement after collision
         end
 

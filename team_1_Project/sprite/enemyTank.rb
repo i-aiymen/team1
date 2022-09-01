@@ -13,12 +13,12 @@ class EnemyTank < Sprite
     @speed_y
     @changeDirection
 
-    def initialize(image)
+    def initialize(x,y,image)
         @img_width = image.width
         @img_height = image.height
         @movingStatus = true
-        @currentPosX = 600
-        @currentPosY = 270
+        @currentPosX = x
+        @currentPosY = y
         @isPotrait = false
         @movementAtColl_x = 0
         @movementAtColl_y = 0
