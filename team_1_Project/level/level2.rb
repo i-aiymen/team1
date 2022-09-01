@@ -5,6 +5,8 @@ class Level2
     @@enemyX = 590
     @@enemyY = 51
     @@playerDirection = 0
+    @@graphicsTime = 0
+    @@flag = -1
     @@playerBullets = []
     @@playerSplBullets = []
     @@enemyBullets = []
@@ -85,6 +87,41 @@ class Level2
         end
     end
 
+    def self.wait()
+        if Input.key_push?(K_RETURN)
+            case(@@flag)
+                when 1
+                    @@flag = 0
+                when 2
+                    @@flag = 3
+                when 3
+                  
+                when 4
+                    @@flag = 5
+                when 5
+                    if $player.lv_up?
+                        @@flag = 6
+                    end
+            end
+        end
+    end
+
+    def self.atack(enemy_data, num)
+        sum = 0
+        case(num)
+            when 0
+                sum += 3
+                sum = [1, sum].max
+                @@enemyData.state["hp"] -= sum
+                @@enemyData.state["hp"] = [enemy_data.state["hp"], 0].max
+            when 1
+                sum += 3
+                sum = [1, sum].max
+                $player.hp -= sum
+                $player.hp = [$player.hp, 0].max
+        end
+    end
+
     def self.hit(enemy_data)
         com_spr = Sprite.new(@@playerX, @@playerY, Image.new(75, 75, C_WHITE))
         enemy_spr = Sprite.new(@@enemyX, @@enemyY, Image.new(75, 75, C_WHITE))
@@ -93,7 +130,7 @@ class Level2
             ch = i - num
             b_sprite = Sprite.new(@@playerBullets[ch][0], @@playerBullets[ch][1], Image.new(75, 75, C_BLACK))
             if enemy_spr === b_sprite
-                Shooting.atack(@@enemyData, 0)
+                Level2.atack(@@enemyData, 0)
                 @@playerBullets.delete_at(i)
                 num += 1
             end
@@ -102,7 +139,7 @@ class Level2
             ch = i - num
             b_sprite = Sprite.new(@@playerSplBullets[ch][0], @@playerSplBullets[ch][1], Image.new(75, 75, C_BLACK))
             if enemy_spr === b_sprite
-                Shooting.atack(@@enemyData, 0)
+                Level2.atack(@@enemyData, 0)
                 @@playerSplBullets.delete_at(i)
                 num += 1
             end
@@ -113,7 +150,7 @@ class Level2
             ch = i - num
             b_sprite = Sprite.new(@@enemyBullets[ch][0], @@enemyBullets[ch][1], Image.new(75, 75, C_BLACK))
             if com_spr === b_sprite
-                Shooting.atack(@@enemyData, 1)
+                Level2.atack(@@enemyData, 1)
                 @@enemyBullets.delete_at(i)
                 num += 1
             end
@@ -121,11 +158,23 @@ class Level2
     end
 
     def self.movements(enemy_data)
-        Level2.playerMovement
-        Level2.bulletMovements
-        Level2.hit(@@enemyData)
-        @@enemyBullets = @@enemyData.shot(@@enemyX, @@enemyY, @@enemyBullets)
-        @@enemyX, @@enemyY = @@enemyData.move(@@enemyX, @@enemyY)
+        case(@@flag)
+            when 0
+                Level2.playerMovement
+                Level2.bulletMovements
+                Level2.hit(@@enemyData)
+                @@enemyBullets = @@enemyData.shot(@@enemyX, @@enemyY, @@enemyBullets)
+                @@enemyX, @@enemyY = @@enemyData.move(@@enemyX, @@enemyY)
+                $player.mp_heal
+                if Level2.die?(@@enemyData, 0) 
+                    @@flag = 2
+                end
+                if Level2.die?(@@enemyData, 1) 
+                    @@flag = 4
+                end
+            when 1, 2, 3, 4, 5, 6
+                Level2.wait()
+            end
     end
 
     def self.die?(enemy_data, num)
@@ -168,6 +217,48 @@ class Level2
 
         @@playerSplBullets.size.times do |i|
             Window.draw(@@playerSplBullets[i][0], @@playerSplBullets[i][1], @@playerSplBulletImage)
+        end
+
+        case(@@flag)
+        when -1
+            @@board1 = Sprite.new(0, 0, Image.new(720, 380 - @@graphicsTime, C_BLACK))
+            @@board2 = Sprite.new(0, 300 + @@graphicsTime, Image.new(720, 380 - @@graphicsTime, C_BLACK))
+            @@graphicsTime += 10
+            Sprite.draw([@@board1, @@board2])
+            if @@graphicsTime >= 300
+                @@flag = 1
+            end
+        when 0
+            #status display
+            @@h_b = Sprite.new(5, 564, Image.new(364, 34, C_WHITE))
+            @@b_b = Sprite.new(7, 566, Image.new(360, 30, C_BLACK))
+            Sprite.draw([@@h_b, @@b_b])
+            Window.draw_font(7, 566, "#{$player.name} HP:#{$player.hp}/20 MP:#{$player.mp}/10", Font.new(30))
+
+            @@h_b = Sprite.new(300, 5, Image.new(274, 64, C_WHITE))
+            @@b_b = Sprite.new(302, 7, Image.new(270, 60, C_BLACK))
+            Sprite.draw([@@h_b, @@b_b])
+            Window.draw_font(302, 7, "incarnation of water", Font.new(30))
+            Window.draw_font(302, 37, "HP:#{@@enemyData.state["hp"]}/30}", Font.new(30))
+
+        when 1, 2, 3, 4, 5, 6
+            @@h_b1 = Sprite.new(5, 350, Image.new(590, 245, C_WHITE))
+            @@b_b1 = Sprite.new(7, 352, Image.new(586, 241, C_BLACK))
+            Sprite.draw([@@h_b1, @@b_b1])
+
+            #comment
+            case(@@flag)
+                when 1
+                    Window.draw_font(7, 352, "incarnation of water appeared", Font.new(30))
+                when 2
+                    Window.draw_font(7, 352, "#{$player.name}fell down", Font.new(30))
+                when 4
+                    Window.draw_font(7, 352, "incarnation of water fell down", Font.new(30))
+                when 5
+                    
+                when 6
+                    Window.draw_font(7, 352, "#{$player.name}has leveled up!!!", Font.new(30))
+            end
         end
         
     end
