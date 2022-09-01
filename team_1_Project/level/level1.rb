@@ -66,7 +66,7 @@ class Level1
         @playerTank_sprite = PlayerTank.new(@@playerTank_img)
         @explosion_maxTime = 20
         @explosion_timer = 0
-        @enemyShooting_offset = 600
+        @enemyShooting_offset = 300
         @enemyShooting_timer = @enemyShooting_offset
         
         2.times do 
