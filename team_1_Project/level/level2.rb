@@ -7,6 +7,7 @@ class Level2
     @@playerDirection = 0
     @@playerBullets = []
     @@playerSplBullets = []
+    @@enemyBullets = []
     @@enemyData = Enemy.new(30,10)
 
     @@backgroundImageLvl2 = Image.load('image/backgroundLvl2.png')
@@ -84,9 +85,46 @@ class Level2
         end
     end
 
+    def self.hit(enemy_data)
+        com_spr = Sprite.new(@@playerX, @@playerY, Image.new(75, 75, C_WHITE))
+        enemy_spr = Sprite.new(@@enemyX, @@enemyY, Image.new(75, 75, C_WHITE))
+        num = 0
+        @@playerBullets.size.times do |i|
+            ch = i - num
+            b_sprite = Sprite.new(@@playerBullets[ch][0], @@playerBullets[ch][1], Image.new(75, 75, C_BLACK))
+            if enemy_spr === b_sprite
+                Shooting.atack(@@enemyData, 0)
+                @@playerBullets.delete_at(i)
+                num += 1
+            end
+        end
+        @@playerSplBullets.size.times do |i|
+            ch = i - num
+            b_sprite = Sprite.new(@@playerSplBullets[ch][0], @@playerSplBullets[ch][1], Image.new(75, 75, C_BLACK))
+            if enemy_spr === b_sprite
+                Shooting.atack(@@enemyData, 0)
+                @@playerSplBullets.delete_at(i)
+                num += 1
+            end
+        end
+
+        num = 0
+        @@enemyBullets.size.times do |i|
+            ch = i - num
+            b_sprite = Sprite.new(@@enemyBullets[ch][0], @@enemyBullets[ch][1], Image.new(75, 75, C_BLACK))
+            if com_spr === b_sprite
+                Shooting.atack(@@enemyData, 1)
+                @@enemyBullets.delete_at(i)
+                num += 1
+            end
+        end
+    end
+
     def self.movements(enemy_data)
         Level2.playerMovement
         Level2.bulletMovements
+        Level2.hit(@@enemyData)
+        @@enemyBullets = @@enemyData.shot(@@enemyX, @@enemyY, @@enemyBullets)
         @@enemyX, @@enemyY = @@enemyData.move(@@enemyX, @@enemyY)
     end
 
@@ -112,12 +150,16 @@ class Level2
         @@playerImage = Image.load("image/playerYoru#{@@playerDirection}.png")
         @@playerBulletImage = Image.load("image/playerBulletImage#{@@playerDirection}.png")
         @@playerSplBulletImage = Image.load('image/playerSplBulletImage.png')
+        @@enemyBulletImage = Image.load('image/enemyBulletImage.png')
 
         Level2.movements(@@enemyData)
         Window.draw(0, 0, @@backgroundImageLvl2) 
         Window.draw(@@playerX, @@playerY, @@playerImage)
         if !Level2.die?(@@enemyData, 1)
             Window.draw(@@enemyX, @@enemyY, @@enemyImage)
+            @@enemyBullets.size.times do |i|
+                Window.draw(@@enemyBullets[i][0], @@enemyBullets[i][1], @@enemyBulletImage)
+            end
         end
 
         @@playerBullets.size.times do |i|
