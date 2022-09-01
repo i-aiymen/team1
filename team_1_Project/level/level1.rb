@@ -3,6 +3,7 @@ require_relative '../sprite/bullet'
 require_relative '../sprite/woodenCrate'
 require_relative '../sprite/spike'
 require_relative '../sprite/playerTank'
+require_relative '../sprite/enemyTank'
 
 class Level1
     # For the maps
@@ -20,7 +21,7 @@ class Level1
     @woodenSprites
     @spikeSprites
     @playerTank_sprite
-    @enemyTankSprite
+    @enemyTank_sprite
     @bulletSprite
     @playerShoot
     @bullet_x
@@ -32,6 +33,7 @@ class Level1
     @@woodenCrate_img = Image.load("image/wooden_crate.png")
     @@spike_img = Image.load("image/spike.png")
     @@playerTank_img = Image.load("image/player_tank.png")
+    @@enemyTank_img = Image.load("image/enemy_l3.png")
     @@bullet_img = Image.load("image/bullet_l1.png")
 
     def initialize
@@ -39,6 +41,7 @@ class Level1
         @woodenSprites = []
         @spikeSprites = []
         @playerTank_sprite = PlayerTank.new(@@playerTank_img)
+        @enemyTank_sprite = EnemyTank.new(@@enemyTank_img)
         @playerShoot = false
         @bullet_speed = 3
 
@@ -72,6 +75,7 @@ class Level1
         
                 when 3
                     @spikeSprites << Spike.new(j * 80, i * 75,  @@spike_img)
+                    puts "#{j * 80}, #{i * 75}"
                      
         
                 when 4
@@ -91,11 +95,13 @@ class Level1
         Sprite.draw(@metalSprites)
         Sprite.draw(@spikeSprites)
         
+        @enemyTank_sprite.draw
         @playerTank_sprite.draw
     end
 
     def update
         @playerTank_sprite.move
+        @enemyTank_sprite.move
 
         Sprite.check(@playerTank_sprite, @metalSprites, :coll_with_metal)
         Sprite.check(@playerTank_sprite, @woodenSprites, nil) # Hit method of WoodenSprite is called
@@ -146,9 +152,10 @@ class Level1
         end
 
         # Collision with other sprites
-        if Sprite.check(@bulletSprite, @metalSprites) || Sprite.check(@bulletSprite, @woodenSprites) || Sprite.check(@bulletSprite, @spikeSprites, nil, :hit_bullet)
-            @playerShoot = false # To stop the bullet movement
+        if Sprite.check(@bulletSprite, @metalSprites, :showExplosion) || Sprite.check(@bulletSprite, @woodenSprites) || Sprite.check(@bulletSprite, @spikeSprites, :showExplosion, :hit_bullet)
+            @playerShoot = false # To stop the bullet movement after collision
         end
+
 
     end
 end
