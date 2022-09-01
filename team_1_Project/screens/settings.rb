@@ -1,7 +1,7 @@
 class Settings
     @@backgroundImage = Image.load('image/background.png')
     @@secondaryBackground = Image.load('image/secondaryBackground2.png')
-    @@nicknameText = Image.load('image/nickName_text.png')
+    @@settingsText = Image.load('image/settings_text.png')
 
     # def initialize
     #     @@backButton = Sprite.new(13,17, Image.load('image/back.png'))
@@ -27,7 +27,7 @@ class Settings
         # update(x, y)
         Window.draw(0, 0, @@backgroundImage)
         Window.draw(36, 42, @@secondaryBackground)
-        # Window.draw(228,165,@@nicknameText)
+        Window.draw(199,65,@@settingsText)
         # flag, nickName, caseType = NicknameInput.nameInput
         # Window.draw_font(255, 220, "(press Space to toggle Case)", Font.new(20),{:color => C_BLACK})
         # Window.draw(240,280,@@textBox)
