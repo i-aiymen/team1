@@ -154,7 +154,7 @@ class EnemyTank < Sprite
     end
 
     def hit_bullet
-        puts "BULLET COLLIDED WITH ENEMYTANK"
+        puts "BULLET COLLIDED WITH ENEMYTANK : x : #{self.x}, y : #{self.y}"
         self.vanish
     end
 

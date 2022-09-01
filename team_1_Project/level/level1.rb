@@ -28,6 +28,11 @@ class Level1
     @bullet_y
     @bullet_speed
     @tankShooting_angle # Angle of the bullet after tank fires it
+    @explodeBullet
+    @explosion_x
+    @explosion_y
+    @explosion_maxTime
+    @explosion_timer
 
     @@metalCrate_img = Image.load("image/metal_crate.png")
     @@woodenCrate_img = Image.load("image/wooden_crate.png")
@@ -35,6 +40,12 @@ class Level1
     @@playerTank_img = Image.load("image/player_tank.png")
     @@enemyTank_img = Image.load("image/enemy_l3.png")
     @@bullet_img = Image.load("image/bullet_l1.png")
+    @@explosion_effects = []
+
+    8.times do |idx|
+        @@explosion_effects << Image.load("image/exp_#{idx + 1}.png")
+    end
+
 
     def initialize
         @metalSprites = []
@@ -42,6 +53,8 @@ class Level1
         @spikeSprites = []
         @enemyTank_sprites = []
         @playerTank_sprite = PlayerTank.new(@@playerTank_img)
+        @explosion_maxTime = 20
+        @explosion_timer = 0
         
         2.times do 
             @enemyTank_sprites << EnemyTank.new(rand(90 .. 540),rand(95 .. 150),@@enemyTank_img)
@@ -52,6 +65,7 @@ class Level1
         end
 
         @playerShoot = false
+        @explodeBullet = false
         @bullet_speed = 3
 
         @map = [
@@ -150,12 +164,27 @@ class Level1
             self.shoot_bullet
         end
 
+        if @explodeBullet
+            self.show_explosion
+        end
+
     end
 
     def shoot_bullet
         @bulletSprite = Bullet.new(@bullet_x, @bullet_y, Image.load("image/bullet_l1.png"))
         @bulletSprite.angle=(@tankShooting_angle)
         @bulletSprite.draw
+
+         # Collision with other sprites
+         if Sprite.check(@bulletSprite, @metalSprites, :showExplosion) || Sprite.check(@bulletSprite, @woodenSprites) || Sprite.check(@bulletSprite, @spikeSprites, :showExplosion, :hit_bullet) || Sprite.check(@bulletSprite, @enemyTank_sprites, nil, :hit_bullet)
+            @playerShoot = false # To stop the bullet movement after collision
+            @explodeBullet = true
+            @explosion_x = @bullet_x
+            @explosion_y = @bullet_y
+            @explosion_timer = @explosion_maxTime
+
+            
+        end
 
         case(@tankShooting_angle)
         when 0
@@ -167,12 +196,22 @@ class Level1
         when -90
             @bullet_y -= @bullet_speed
         end
+    end
 
-        # Collision with other sprites
-        if Sprite.check(@bulletSprite, @metalSprites, :showExplosion) || Sprite.check(@bulletSprite, @woodenSprites) || Sprite.check(@bulletSprite, @spikeSprites, :showExplosion, :hit_bullet) || Sprite.check(@bulletSprite, @enemyTank_sprites, nil, :hit_bullet)
-            @playerShoot = false # To stop the bullet movement after collision
+    def show_explosion
+        if @explosion_timer >= 5
+            case(@explosion_timer / 5)
+            when 4
+                Window.draw(@explosion_x - @@explosion_effects[0].width / 2, @explosion_y - @@explosion_effects[0].height / 2, @@explosion_effects[0])
+            when 3
+                Window.draw(@explosion_x - @@explosion_effects[2].width / 2, @explosion_y - @@explosion_effects[2].height / 2, @@explosion_effects[2])
+            when 2
+                Window.draw(@explosion_x - @@explosion_effects[4].width / 2, @explosion_y - @@explosion_effects[4].height / 2, @@explosion_effects[4])
+            when 1
+                Window.draw(@explosion_x - @@explosion_effects[6].width / 2, @explosion_y - @@explosion_effects[6].height / 2, @@explosion_effects[6])
+            end
         end
 
-
+        @explosion_timer -= 1
     end
 end
