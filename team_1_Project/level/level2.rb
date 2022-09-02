@@ -95,13 +95,6 @@ class Level2
                 when 2
                     @@flag = 3
                 when 3
-                  
-                when 4
-                    @@flag = 5
-                when 5
-                    if $player.lv_up?
-                        @@flag = 6
-                    end
             end
         end
     end
