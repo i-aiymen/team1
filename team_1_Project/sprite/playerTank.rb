@@ -7,18 +7,20 @@ class PlayerTank < Sprite
     @isPotrait
     @movementAtColl_x # Contains the input.x at the time of collision
     @movementAtColl_y # Contains the input.x at the time of collision
+    @hp_current
+    @hp_max
 
-    def initialize
-        image = Image.load("image/player_tank.png")
+    def initialize(image)
         @img_width = image.width
         @img_height = image.height
         @movingStatus = true
         @currentPosX = 0
-        @currentPosY = 230
+        @currentPosY = 270
         @isPotrait = false
         @movementAtColl_x = 0
         @movementAtColl_y = 0
-
+        @hp_max = 20
+        @hp_current = @hp_max
         super(@currentPosX,@currentPosY,image)
     end
 
@@ -33,6 +35,8 @@ class PlayerTank < Sprite
     def getMovingStatus
         return @movingStatus
     end
+
+
     def move
         i_x = Input.x
         i_y = Input.y 
@@ -96,4 +100,19 @@ class PlayerTank < Sprite
         @movementAtColl_y = Input.y 
     end
 
+    def returnBulletPos
+
+    end
+
+    def getCurrentHP
+        return @hp_current
+    end
+
+    def decreaseCurrentHP
+        @hp_current -= 5
+
+        if @hp_current == 0
+            self.vanish
+        end
+    end
 end
