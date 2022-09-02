@@ -44,29 +44,31 @@ Window.loop do
 #     a.draw
 # =======
 
-    case($flag)
-        when 0
-            a = Home.new
-            a.draw
-        when 1
-            a = Nickname.new
-            a.draw
-        when 2
-            a = Settings.new
-            a.draw
-        when 3
-            a = Rules.new
-            a.draw
-        when 4
-            a = Home.new
-            a.musicPlaying ? a.musicStop : a.music
-            $flag = 0
-        when 5
-          Window.close
+Level2.draw
 
-        when 6
-          a = ChangeAvatar.new
-          a.draw
-    end
+    # case($flag)
+    #     when 0
+    #         a = Home.new
+    #         a.draw
+    #     when 1
+    #         a = Nickname.new
+    #         a.draw
+    #     when 2
+    #         a = Settings.new
+    #         a.draw
+    #     when 3
+    #         a = Rules.new
+    #         a.draw
+    #     when 4
+    #         a = Home.new
+    #         a.musicPlaying ? a.musicStop : a.music
+    #         $flag = 0
+    #     when 5
+    #       Window.close
+
+    #     when 6
+    #       a = ChangeAvatar.new
+    #       a.draw
+    # end
 
 end
