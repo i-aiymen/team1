@@ -46,7 +46,7 @@ class Level1
     @@metalCrate_img = Image.load("image/metal_crate.png")
     @@woodenCrate_img = Image.load("image/wooden_crate.png")
     @@spike_img = Image.load("image/spike.png")
-    @@playerTank_img = Image.load("image/player_tank.png")
+    @@playerTank_img = Image.load("image/goldTank.png")
     @@enemyTank_img = Image.load("image/enemy_l3.png")
     @@bullet_img = Image.load("image/bullet_l1.png")
     @@explosion_effects = []
