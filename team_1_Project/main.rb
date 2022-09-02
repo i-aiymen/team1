@@ -20,6 +20,8 @@ metalSprites, woodenSprites, spikeSprites = Level1.returnSprites # Array contain
 playerTank = PlayerTank.new
 $player = Player.new
 
+startStory = StartStory.new
+
 
 Window.loop do
 # <<<<<<< HEAD
@@ -44,29 +46,35 @@ Window.loop do
 #     a.draw
 # =======
 
-    case($flag)
-        when 0
-            a = Home.new
-            a.draw
-        when 1
-            a = Nickname.new
-            a.draw
-        when 2
-            a = Settings.new
-            a.draw
-        when 3
-            a = Rules.new
-            a.draw
-        when 4
-            a = Home.new
-            a.musicPlaying ? a.musicStop : a.music
-            $flag = 0
-        when 5
-          Window.close
+    # case($flag)
+    #     when 0
+    #         a = Home.new
+    #         a.draw
+    #     when 1
+    #         a = Nickname.new
+    #         a.draw
+    #     when 2
+    #         a = Settings.new
+    #         a.draw
+    #     when 3
+    #         a = Rules.new
+    #         a.draw
+    #     when 4
+    #         a = Home.new
+    #         a.musicPlaying ? a.musicStop : a.music
+    #         $flag = 0
+    #     when 5
+    #       Window.close
 
-        when 6
-          a = ChangeAvatar.new
-          a.draw
-    end
+    #     when 6
+    #       a = ChangeAvatar.new
+    #       a.draw
+    # end
+
+    # Level2.draw
+
+    startStory.draw
+
+    startStory.update
 
 end
