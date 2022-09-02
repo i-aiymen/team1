@@ -32,12 +32,13 @@ Window.loop do
         when 2
             a = Settings.new
             a.draw
-
         when 3
             a = Rules.new
             a.draw
         when 4
-          
+            a = Home.new
+            a.musicPlaying ? a.musicStop : a.music
+            $flag = 0
         when 5
           Window.close
 

@@ -2,6 +2,7 @@ class Home
 
     @@backgroundImage = Image.load('image/background.png')
     @@gameNameText = Image.load('image/gameName_text.png')
+    @@isPlaying = false
 
     def initialize
         @@playButton = Sprite.new(290,372, Image.load('image/play.png'))
@@ -9,9 +10,22 @@ class Home
         @@rulesButton = Sprite.new(13,80, Image.load('image/rules.png'))
         @@musicButton = Sprite.new(660,17, Image.load('image/music.png'))
         @@exitButton = Sprite.new(660,80, Image.load('image/exit.png'))
+        @sound = Sound.new("music/music1.wav")
     end
 
-    
+    def music
+        @sound.play
+        @@isPlaying = true
+    end
+
+    def musicStop 
+        @sound.stop
+        @@isPlaying = false
+    end
+
+    def musicPlaying
+        return @@isPlaying
+    end
 
     def update(x, y)
         m = Sprite.new(x, y, Image.new(1, 1, C_BLACK))
