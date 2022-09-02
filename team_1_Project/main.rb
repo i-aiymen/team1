@@ -68,6 +68,5 @@ Window.loop do
           a = ChangeAvatar.new
           a.draw
     end
->>>>>>> c55c94efabd43fcd9df054379d9e5a11c6d55bb5
 
 end
