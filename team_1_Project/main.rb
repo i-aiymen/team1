@@ -22,27 +22,6 @@ $player = Player.new
 
 
 Window.loop do
-# <<<<<<< HEAD
-#     # Sprite.draw(metalSprites)
-#     # Sprite.draw(woodenSprites)
-#     # Sprite.draw(spikeSprites)
-#     # playerTank.draw
-    
-#     # playerTank.move
-
-#     # Sprite.check(playerTank, metalSprites, :coll_with_metal)
-#     # Sprite.check(playerTank, woodenSprites, nil) # Hit method of WoodenSprite is called
-#     # Sprite.check(playerTank, spikeSprites, nil) # Hit method of spikeSprite is called
-
-#     # a = GameOver.new
-#     # a.draw
-
-#     #a = Home.new
-#     #a.draw
-
-#     a = Rules.new
-#     a.draw
-# =======
 
     case($flag)
         when 0

@@ -196,7 +196,7 @@ class Level2
     end
 
     def self.draw
-        @@playerImage = Image.load("image/#{$nickName}#{@@playerDirection}.png")
+        @@playerImage = Image.load("image/#{$avatar}#{@@playerDirection}.png")
         @@playerBulletImage = Image.load("image/playerBulletImage#{@@playerDirection}.png")
         @@playerSplBulletImage = Image.load('image/playerSplBulletImage.png')
         @@enemyBulletImage = Image.load('image/enemyBulletImage.png')
@@ -232,7 +232,7 @@ class Level2
             @@scoreBoard = Image.load('image/scoreBoard.png')
             Window.draw(15,12,@@scoreBoard)
             Window.draw_font(160, 31, "#{$player.hp}/20", Font.new(30),{:color => C_BLACK})
-            Window.draw_font(30, 31, "#{$nickName}", Font.new(20),{:color => C_BLACK})
+            Window.draw_font(30, 31, "#{$playerNickname}", Font.new(20),{:color => C_BLACK})
             Window.draw_font(30, 50, "Player", Font.new(14),{:color => [255,0, 255, 0]})
             Window.draw_font(240, 31, "#{@@enemyData.state["hp"]}/30", Font.new(30),{:color => C_BLACK})
             Window.draw_font(360, 31, "ROBO-EL", Font.new(20),{:color => C_BLACK})
