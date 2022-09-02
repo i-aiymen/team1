@@ -15,9 +15,15 @@ class Settings
         m = Sprite.new(x, y, Image.new(1, 1, C_BLACK))
         if m === @@changeButton
             @@changeButton = Sprite.new(294,334, Image.load('image/changeHover.png'))
+            if Input.mouse_push?(M_LBUTTON)
+                $flag = 6
+            end
         end
         if m === @@backButton
             @@backButton = Sprite.new(344,487, Image.load('image/backHover.png'))
+            if Input.mouse_push?(M_LBUTTON)
+                $flag = 0
+            end
         end
     end
 

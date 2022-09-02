@@ -38,6 +38,10 @@ Window.loop do
         when 2
             a = Settings.new
             a.draw
+
+        when 6
+          a = ChangeAvatar.new
+          a.draw
     end
 
 end
