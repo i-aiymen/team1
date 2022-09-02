@@ -95,13 +95,6 @@ class Level2
                 when 2
                     @@flag = 3
                 when 3
-                  
-                when 4
-                    @@flag = 5
-                when 5
-                    if $player.lv_up?
-                        @@flag = 6
-                    end
             end
         end
     end
@@ -196,7 +189,7 @@ class Level2
     end
 
     def self.draw
-        @@playerImage = Image.load("image/playerYoru#{@@playerDirection}.png")
+        @@playerImage = Image.load("image/#{$avatar}#{@@playerDirection}.png")
         @@playerBulletImage = Image.load("image/playerBulletImage#{@@playerDirection}.png")
         @@playerSplBulletImage = Image.load('image/playerSplBulletImage.png')
         @@enemyBulletImage = Image.load('image/enemyBulletImage.png')
@@ -229,35 +222,29 @@ class Level2
                 @@flag = 1
             end
         when 0
-            #status display
-            @@h_b = Sprite.new(5, 564, Image.new(364, 34, C_WHITE))
-            @@b_b = Sprite.new(7, 566, Image.new(360, 30, C_BLACK))
-            Sprite.draw([@@h_b, @@b_b])
-            Window.draw_font(7, 566, "#{$player.name} HP:#{$player.hp}/20 MP:#{$player.mp}/10", Font.new(30))
-
-            @@h_b = Sprite.new(300, 5, Image.new(274, 64, C_WHITE))
-            @@b_b = Sprite.new(302, 7, Image.new(270, 60, C_BLACK))
-            Sprite.draw([@@h_b, @@b_b])
-            Window.draw_font(302, 7, "incarnation of water", Font.new(30))
-            Window.draw_font(302, 37, "HP:#{@@enemyData.state["hp"]}/30}", Font.new(30))
+            @@scoreBoard = Image.load('image/scoreBoard.png')
+            Window.draw(15,12,@@scoreBoard)
+            Window.draw_font(160, 31, "#{$player.hp}/20", Font.new(30),{:color => C_BLACK})
+            Window.draw_font(30, 31, "#{$playerNickname}", Font.new(20),{:color => C_BLACK})
+            Window.draw_font(30, 50, "Player", Font.new(14),{:color => [255,0, 255, 0]})
+            Window.draw_font(240, 31, "#{@@enemyData.state["hp"]}/30", Font.new(30),{:color => C_BLACK})
+            Window.draw_font(360, 31, "ROBO-EL", Font.new(20),{:color => C_BLACK})
+            Window.draw_font(400, 50, "Enemy", Font.new(14),{:color => [255,255, 0, 0]})
 
         when 1, 2, 3, 4, 5, 6
-            @@h_b1 = Sprite.new(5, 350, Image.new(590, 245, C_WHITE))
-            @@b_b1 = Sprite.new(7, 352, Image.new(586, 241, C_BLACK))
-            Sprite.draw([@@h_b1, @@b_b1])
+            @@board = Sprite.new(7, 420, Image.new(705, 241, C_BLACK))
+            Sprite.draw([@@board])
 
             #comment
             case(@@flag)
                 when 1
-                    Window.draw_font(7, 352, "incarnation of water appeared", Font.new(30))
+                    Window.draw_font(15, 430, "Level 2 : ROBO-EL appeared", Font.new(30))
                 when 2
-                    Window.draw_font(7, 352, "#{$player.name}fell down", Font.new(30))
+                    Window.draw_font(15, 430, "You failed to kill the ROBO-EL. The invasion will continue", Font.new(30))
+                    $flag = 7
                 when 4
-                    Window.draw_font(7, 352, "incarnation of water fell down", Font.new(30))
-                when 5
-                    
-                when 6
-                    Window.draw_font(7, 352, "#{$player.name}has leveled up!!!", Font.new(30))
+                    Window.draw_font(15, 430, "ROBO-EL fell down", Font.new(30))
+                    $flag = 7
             end
         end
         

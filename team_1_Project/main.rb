@@ -24,57 +24,32 @@ startStory = StartStory.new
 
 
 Window.loop do
-# <<<<<<< HEAD
-#     # Sprite.draw(metalSprites)
-#     # Sprite.draw(woodenSprites)
-#     # Sprite.draw(spikeSprites)
-#     # playerTank.draw
-    
-#     # playerTank.move
+    case($flag)
+        when 0
+            a = Home.new
+            a.draw
+        when 1
+            a = Nickname.new
+            a.draw
+        when 2
+            a = Settings.new
+            a.draw
+        when 3
+            a = Rules.new
+            a.draw
+        when 4
+            a = Home.new
+            a.musicPlaying ? a.musicStop : a.music
+            $flag = 0
+        when 5
+          Window.close
 
-#     # Sprite.check(playerTank, metalSprites, :coll_with_metal)
-#     # Sprite.check(playerTank, woodenSprites, nil) # Hit method of WoodenSprite is called
-#     # Sprite.check(playerTank, spikeSprites, nil) # Hit method of spikeSprite is called
-
-#     # a = GameOver.new
-#     # a.draw
-
-#     #a = Home.new
-#     #a.draw
-
-#     a = Rules.new
-#     a.draw
-# =======
-
-    # case($flag)
-    #     when 0
-    #         a = Home.new
-    #         a.draw
-    #     when 1
-    #         a = Nickname.new
-    #         a.draw
-    #     when 2
-    #         a = Settings.new
-    #         a.draw
-    #     when 3
-    #         a = Rules.new
-    #         a.draw
-    #     when 4
-    #         a = Home.new
-    #         a.musicPlaying ? a.musicStop : a.music
-    #         $flag = 0
-    #     when 5
-    #       Window.close
-
-    #     when 6
-    #       a = ChangeAvatar.new
-    #       a.draw
-    # end
-
-    # Level2.draw
-
-    startStory.draw
-
-    startStory.update
-
+        when 6
+          a = ChangeAvatar.new
+          a.draw
+        
+        when 7
+          a = GameOver.new
+          a.draw
+    end
 end
