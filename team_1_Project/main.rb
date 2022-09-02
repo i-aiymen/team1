@@ -6,6 +6,7 @@ Dir['./char/*.rb', './level/*.rb','./screens/*.rb'].each do |file|
 
 $flag = 0
 $playerNickname = 'Akio'
+$avatar = 'playerYoru'
 
 #window settings
 Window.width = 720
@@ -29,7 +30,6 @@ Window.loop do
     # Sprite.check(playerTank, metalSprites, :coll_with_metal)
     # Sprite.check(playerTank, woodenSprites, nil) # Hit method of WoodenSprite is called
     # Sprite.check(playerTank, spikeSprites, nil) # Hit method of spikeSprite is called
-
     case($flag)
         when 0
             a = Home.new
