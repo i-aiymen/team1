@@ -4,7 +4,6 @@ class Nickname
     @@secondaryBackground = Image.load('image/secondaryBackground.png')
     @@nicknameText = Image.load('image/nickName_text.png')
     @@textBox = Image.new(231, 42,[127, 255, 255, 255])
-    @@textBox.box_fill(0, 0, 231, 0.5, [200, 0, 0, 0])
 
     def initialize
         @@backButton = Sprite.new(13,17, Image.load('image/back.png'))
@@ -17,9 +16,15 @@ class Nickname
         m = Sprite.new(x, y, Image.new(1, 1, C_BLACK))
         if m === @@backButton
             @@backButton = Sprite.new(13,17, Image.load('image/backHover.png'))
+            if Input.mouse_push?(M_LBUTTON)
+                $flag = 0
+            end
         end
         if m === @@playGameButton
             @@playGameButton = Sprite.new(344,457, Image.load('image/playGameHover.png'))
+            if Input.mouse_push?(M_LBUTTON)
+                $flag = 7
+            end
         end
     end
 
@@ -35,6 +40,9 @@ class Nickname
         Window.draw_font(255, 220, "(press Space to toggle Case)", Font.new(20),{:color => C_BLACK})
         Window.draw(240,280,@@textBox)
         Window.draw_font(240, 288, nickName, Font.new(25),{:color => C_BLACK})
+
+        $playerNickname = nickName
+
         Window.draw_font(295, 336, "Active:", Font.new(20),{:color => C_BLACK})
         Window.draw_font(350, 336, ((caseType == 0)? "Lowercase" : "Uppercase"), Font.new(20),{:color => [255,164,47,68]})
         Sprite.draw([@@backButton,@@playGameButton])

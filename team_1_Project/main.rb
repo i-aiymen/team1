@@ -5,6 +5,7 @@ Dir['./char/*.rb', './level/*.rb','./screens/*.rb'].each do |file|
   end
 
 $flag = 0
+$playerNickname = 'Akio'
 
 #window settings
 Window.width = 720
@@ -34,7 +35,8 @@ Window.loop do
             a = Home.new
             a.draw
         when 1
-        
+            a = Nickname.new
+            a.draw
         when 2
             a = Settings.new
             a.draw
