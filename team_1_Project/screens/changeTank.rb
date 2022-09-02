@@ -42,7 +42,7 @@ class ChangeTank
         if m === @@backButton
             @@backButton = Sprite.new(344,550, Image.load('image/backHover.png'))
             if Input.mouse_push?(M_LBUTTON)
-                $flag = 2
+                $flag = 1
             end
         end
     end

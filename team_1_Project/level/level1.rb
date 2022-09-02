@@ -41,11 +41,12 @@ class Level1
     
     @enemyTankShoot
     @enemyBullet_posArr
+
     @@font_32 = Font.new(32)
     @@metalCrate_img = Image.load("image/metal_crate.png")
     @@woodenCrate_img = Image.load("image/wooden_crate.png")
     @@spike_img = Image.load("image/spike.png")
-    @@playerTank_img = Image.load("image/#{$tank}.png")
+    @@playerTank_img = Image.load("image/goldTank.png")
     @@enemyTank_img = Image.load("image/enemy_l3.png")
     @@bullet_img = Image.load("image/bullet_l1.png")
     @@explosion_effects = []
@@ -72,7 +73,6 @@ class Level1
         @explosion_timer = 0
         @enemyShooting_offset = 300
         @enemyShooting_timer = @enemyShooting_offset
-        @@playerTank_img = Image.load("image/#{$tank}.png")
         
         2.times do 
             @enemyTank_sprites << EnemyTank.new(rand(90 .. 540),rand(95 .. 150),@@enemyTank_img)

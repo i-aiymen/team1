@@ -95,6 +95,11 @@ class Level2
                 when 2
                     @@flag = 3
                 when 3
+                    @@flag = 4
+                when 4
+                    @@flag = 5
+                when 5
+                    @@s_f = 6
             end
         end
     end
@@ -242,9 +247,11 @@ class Level2
                     Window.draw_font(15, 470, "Now move on to Level 2 : ROBO-EL appeared", Font.new(30))
                 when 2
                     Window.draw_font(15, 430, "You failed to kill the ROBO-EL. The invasion will continue", Font.new(30))
+                when 3
                     $flag = 7
                 when 4
-                    Window.draw_font(15, 430, "ROBO-EL fell down", Font.new(30))
+                    Window.draw_font(15, 430, "ROBO-EL has been defeated. You have saved the village", Font.new(30))
+                when 5
                     $flag = 7
             end
         end

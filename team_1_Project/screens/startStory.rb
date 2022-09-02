@@ -40,6 +40,9 @@ class StartStory
         end
 
         if @isShowing
+            if @storyIndex >= @@storyImages.size
+                @storyIndex = 0
+            end
             Window.draw(0,0,@@storyImages[@storyIndex])
         end
 
