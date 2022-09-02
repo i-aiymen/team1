@@ -39,6 +39,13 @@ Window.loop do
             a = Settings.new
             a.draw
 
+        when 3
+
+        when 4
+          
+        when 5
+          Window.close
+
         when 6
           a = ChangeAvatar.new
           a.draw
