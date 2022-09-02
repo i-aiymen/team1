@@ -4,6 +4,8 @@ Dir['./char/*.rb', './level/*.rb','./screens/*.rb'].each do |file|
     require_relative file
   end
 
+$flag = 0
+
 #window settings
 Window.width = 720
 Window.height = 676
@@ -27,9 +29,15 @@ Window.loop do
     # Sprite.check(playerTank, woodenSprites, nil) # Hit method of WoodenSprite is called
     # Sprite.check(playerTank, spikeSprites, nil) # Hit method of spikeSprite is called
 
-    # a = GameOver.new
-    # a.draw
-
-    Level2.draw
+    case($flag)
+        when 0
+            a = Home.new
+            a.draw
+        when 1
+        
+        when 2
+            a = Settings.new
+            a.draw
+    end
 
 end
