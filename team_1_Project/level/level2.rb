@@ -238,7 +238,8 @@ class Level2
             #comment
             case(@@flag)
                 when 1
-                    Window.draw_font(15, 430, "Level 2 : ROBO-EL appeared", Font.new(30))
+                    Window.draw_font(15, 430, "You have successfully defeated the guards.", Font.new(30))
+                    Window.draw_font(15, 470, "Now move on to Level 2 : ROBO-EL appeared", Font.new(30))
                 when 2
                     Window.draw_font(15, 430, "You failed to kill the ROBO-EL. The invasion will continue", Font.new(30))
                     $flag = 7

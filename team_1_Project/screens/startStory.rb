@@ -49,6 +49,7 @@ class StartStory
 
         if @storyIndex >= @@storyImages.size
             @isShowing = false
+            $flag = 9
         end
     end
 end

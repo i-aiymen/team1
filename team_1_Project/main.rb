@@ -1,6 +1,6 @@
 require 'dxruby'
 
-Dir['./char/*.rb', './level/*.rb','./screens/*.rb'].each do |file|
+Dir['./char/*.rb', './level/*.rb','./screens/*.rb','./sprite/*.rb'].each do |file|
     require_relative file
   end
 
@@ -15,11 +15,10 @@ Window.height = 676
 Window.caption = "SKYLINE"
 Window.bgcolor = C_WHITE
 
-
-playerTank = PlayerTank.new
 $player = Player.new
 
 startStory = StartStory.new
+level1 = Level1.new
 
 
 Window.loop do
@@ -50,5 +49,17 @@ case($flag)
     when 7
       a = GameOver.new
       a.draw
+
+    when 8
+      startStory.draw
+      startStory.update
+    when 9
+      a = ChangeTank.new
+      a.draw
+    when 10
+      level1.draw
+      level1.update
+    when 11
+     Level2.draw
     end
 end

@@ -113,6 +113,7 @@ class PlayerTank < Sprite
 
         if @hp_current == 0
             self.vanish
+            $flag = 7
         end
     end
 end

@@ -4,9 +4,9 @@ class ChangeTank
     @@settingsText = Image.load('image/tanks_text.png')
 
     def initialize
-        @@tank1 = Sprite.new(120,216, Image.load('image/goldTank.png'))
-        @@tank2 = Sprite.new(296,216, Image.load('image/blackTank.png'))
-        @@tank3 = Sprite.new(472,216, Image.load('image/greenTank.png'))
+        @@tank1 = Sprite.new(120,216, Image.load('image/goldTank1.png'))
+        @@tank2 = Sprite.new(296,216, Image.load('image/blackTank1.png'))
+        @@tank3 = Sprite.new(472,216, Image.load('image/greenTank1.png'))
         @@backButton = Sprite.new(344,550, Image.load('image/back.png'))
         @@tankNameButton1 = Sprite.new(118,444, Image.load('image/tankName1.png'))
         @@tankNameButton2 = Sprite.new(291,444, Image.load('image/tankName2.png'))
@@ -22,21 +22,21 @@ class ChangeTank
             @@tankNameButton1 = Sprite.new(118,444, Image.load('image/tankName1Hover.png'))
             if Input.mouse_push?(M_LBUTTON)
                 $tank = 'goldTank'
-                $flag = 0
+                $flag = 10
             end
         end
         if m === @@tankNameButton2
             @@tankNameButton2 = Sprite.new(291,444, Image.load('image/tankName2Hover.png'))
             if Input.mouse_push?(M_LBUTTON)
                 $tank = 'blackTank'
-                $flag = 0
+                $flag = 10
             end
         end
         if m === @@tankNameButton3
             @@tankNameButton3 = Sprite.new(464,444, Image.load('image/tankName3Hover.png'))
             if Input.mouse_push?(M_LBUTTON)
                 $tank = 'greenTank'
-                $flag = 0
+                $flag = 10
             end
         end
         if m === @@backButton

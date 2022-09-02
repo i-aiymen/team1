@@ -23,7 +23,7 @@ class Nickname
         if m === @@playGameButton
             @@playGameButton = Sprite.new(344,457, Image.load('image/playGameHover.png'))
             if Input.mouse_push?(M_LBUTTON)
-                $flag = 7
+                $flag = 8
             end
         end
     end
