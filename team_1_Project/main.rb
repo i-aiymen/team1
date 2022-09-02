@@ -15,6 +15,6 @@ level1 = Level1.new
 Window.loop do
 
     level1.draw
-
+    
     level1.update
 end

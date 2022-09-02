@@ -50,6 +50,11 @@ class Level1
     @@enemyTank_img = Image.load("image/enemy_l3.png")
     @@bullet_img = Image.load("image/bullet_l1.png")
     @@explosion_effects = []
+    @@playerInfo_box = Image.new(72,66,C_WHITE)
+    @@enemyInfo_box = Image.new(72,66,C_WHITE)
+    @@playerDP = Image.load("image/playerDP.png")
+    @@enemyDP = Image.load("image/enemyTankDP.png")
+
 
     8.times do |idx|
         @@explosion_effects << Image.load("image/exp_#{idx + 1}.png")
@@ -106,7 +111,7 @@ class Level1
                 when 1
                     @metalSprites << MetalCrate.new(j * 80, i * 75, @@metalCrate_img)
                     # Adding the sprite to the array
-                    puts "Metal : #{j * 80}, #{i * 75}"
+                    puts "Metal : #{j * 80}, #{i * 75}, #{@@metalCrate_img.width}, #{@@metalCrate_img.height}"
         
                 when 2
                     @woodenSprites << WoodenCrate.new(j * 80, i * 75, @@woodenCrate_img)
@@ -139,7 +144,21 @@ class Level1
         Sprite.draw(@enemyTank_sprites)
         @playerTank_sprite.draw
 
-        Window.draw_font(0, 300, "HP : #{@playerTank_sprite.getCurrentHP}", @@font_32, {color: C_BLACK})
+        # Player and Enemy Info Box
+        Window.draw(244.5,304.5,@@playerInfo_box)
+        Window.draw(404.5,304.5,@@enemyInfo_box)
+
+        Window.draw_font(265.5,317.5, "John", Font.new(16), {color: C_GREEN})
+        Window.draw_font(420.5,317.5, "Enemy", Font.new(16), {color: C_RED})
+        Window.draw(244.5,337.5, Image.new(72,2,C_BLACK))
+        Window.draw(404.5,337.5, Image.new(72,2,C_BLACK))
+
+        Window.draw_font(253.5,343.5, "#{@playerTank_sprite.getCurrentHP} / 20", Font.new(20), {color: C_BLUE})
+
+        enemiesCount = 4 - @enemyTank_sprites.size == 4 ? "K.O" : "#{4 - @enemyTank_sprites.size} / 4" 
+        Window.draw_font(423.5,343.5, "#{enemiesCount}", Font.new(20), {color: C_BLUE})
+
+
     end
 
     def update
