@@ -5,7 +5,8 @@ class Settings
     @@avatarText = Image.load('image/avatar_text.png')
 
     def initialize
-        @@changeButton = Sprite.new(277,334, Image.load('image/change.png'))
+        @@changeButton = Sprite.new(294,334, Image.load('image/change.png'))
+        @@backButton = Sprite.new(344,487, Image.load('image/back.png'))
     end
 
     
@@ -13,7 +14,10 @@ class Settings
     def update(x, y)
         m = Sprite.new(x, y, Image.new(1, 1, C_BLACK))
         if m === @@changeButton
-            @@changeButton = Sprite.new(277,334, Image.load('image/changeHover.png'))
+            @@changeButton = Sprite.new(294,334, Image.load('image/changeHover.png'))
+        end
+        if m === @@backButton
+            @@backButton = Sprite.new(344,487, Image.load('image/backHover.png'))
         end
     end
 
@@ -24,8 +28,8 @@ class Settings
         update(x, y)
         Window.draw(0, 0, @@backgroundImage)
         Window.draw(36, 42, @@secondaryBackground)
-        Window.draw(199,65,@@settingsText)
-        Window.draw(264,282,@@avatarText)
-        Sprite.draw([@@changeButton])
+        Window.draw(210,70,@@settingsText)
+        Window.draw(278,282,@@avatarText)
+        Sprite.draw([@@changeButton,@@backButton])
     end
 end
