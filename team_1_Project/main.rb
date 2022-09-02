@@ -42,7 +42,8 @@ Window.loop do
             a.draw
 
         when 3
-
+            a = Rules.new
+            a.draw
         when 4
           
         when 5
