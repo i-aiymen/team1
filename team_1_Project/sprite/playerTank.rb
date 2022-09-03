@@ -9,6 +9,7 @@ class PlayerTank < Sprite
     @movementAtColl_y # Contains the input.x at the time of collision
     @hp_current
     @hp_max
+    @hpDecreased # Bool : HP decreased upon collision with spike
 
     def initialize(image)
         @img_width = image.width
@@ -21,6 +22,8 @@ class PlayerTank < Sprite
         @movementAtColl_y = 0
         @hp_max = 20
         @hp_current = @hp_max
+        @hpDecreased = false
+
         super(@currentPosX,@currentPosY,image)
     end
 
@@ -48,6 +51,7 @@ class PlayerTank < Sprite
         if(@movingStatus == false && (i_x != @movementAtColl_x || i_y != @movementAtColl_y))
             puts "movingStat : #{@movingStatus}"
             @movingStatus = true
+            @hpDecreased = false
         end
         # puts "movingStat : #{@movingStatus}"
 
@@ -106,7 +110,20 @@ class PlayerTank < Sprite
 
 
     def coll_with_spike
-        self.decreaseCurrentHP
+
+        # Check if HP has already decreased
+        # Bug ::::::::::::::::::::::::
+        if !@hpDecreased 
+            self.decreaseCurrentHP
+            # Stopping the tank
+            @movingStatus = false
+    
+            @movementAtColl_x = Input.x 
+            @movementAtColl_y = Input.y
+    
+            # HP should only decrease once
+            @hpDecreased = true 
+        end
     end
 
     def getCurrentHP
