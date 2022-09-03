@@ -112,14 +112,19 @@ class PlayerTank < Sprite
     def coll_with_spike
 
         # Check if HP has already decreased
-        # Bug ::::::::::::::::::::::::
         if !@hpDecreased 
-            self.decreaseCurrentHP
+            self.decreaseCurrentHP(3)
             # Stopping the tank
             @movingStatus = false
-    
             @movementAtColl_x = Input.x 
             @movementAtColl_y = Input.y
+            
+            # Will move the playertank a lil bit backward
+            puts "Spike col x : #{self.x}, y : #{self.y}"
+            self.x -= Input.x * 4 
+            self.y-= Input.y * 4
+            puts "Spike col x : #{self.x}, y : #{self.y}"
+            
     
             # HP should only decrease once
             @hpDecreased = true 
@@ -130,12 +135,16 @@ class PlayerTank < Sprite
         return @hp_current
     end
 
-    def decreaseCurrentHP
-        @hp_current -= 5
+    def decreaseCurrentHP(dec)
+        @hp_current -= dec
 
         if @hp_current == 0
             self.vanish
             $flag = 7
         end
+    end
+
+    def coll_with_bullet
+        self.decreaseCurrentHP(5)
     end
 end
