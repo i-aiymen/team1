@@ -104,6 +104,11 @@ class PlayerTank < Sprite
 
     end
 
+
+    def coll_with_spike
+        self.decreaseCurrentHP
+    end
+
     def getCurrentHP
         return @hp_current
     end

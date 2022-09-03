@@ -179,7 +179,7 @@ class Level1
 
         Sprite.check(@playerTank_sprite, @metalSprites, :coll_with_metal)
         Sprite.check(@playerTank_sprite, @woodenSprites, nil) # Hit method of WoodenSprite is called
-        Sprite.check(@playerTank_sprite, @spikeSprites, nil) # Hit method of spikeSprite is called
+        Sprite.check(@playerTank_sprite, @spikeSprites, :coll_with_spike) # Hit method of spikeSprite is called
         Sprite.check(@enemyTank_sprites, @metalSprites, :shot_sprites, nil)
         Sprite.check(@enemyTank_sprites, @woodenSprites, :shot_sprites, nil)
         Sprite.check(@enemyTank_sprites, @spikeSprites, :shot_sprites, nil)
