@@ -23,6 +23,7 @@ class ChangeTank
             if Input.mouse_push?(M_LBUTTON)
                 $tank = 'goldTank'
                 $flag = 10
+                $tankChanged = true
             end
         end
         if m === @@tankNameButton2
@@ -30,6 +31,7 @@ class ChangeTank
             if Input.mouse_push?(M_LBUTTON)
                 $tank = 'blackTank'
                 $flag = 10
+                $tankChanged = true
             end
         end
         if m === @@tankNameButton3
@@ -37,6 +39,7 @@ class ChangeTank
             if Input.mouse_push?(M_LBUTTON)
                 $tank = 'greenTank'
                 $flag = 10
+                $tankChanged = true
             end
         end
         if m === @@backButton

@@ -42,13 +42,15 @@ class Level1
     @enemyTankShoot
     @enemyBullet_posArr
 
+    @playerTank_img
+    @enemyTank_img
+    @bullet_img
+
     @@font_32 = Font.new(32)
     @@metalCrate_img = Image.load("image/metal_crate.png")
     @@woodenCrate_img = Image.load("image/wooden_crate.png")
     @@spike_img = Image.load("image/spike.png")
-    @@playerTank_img = Image.load("image/goldTank.png")
-    @@enemyTank_img = Image.load("image/enemy_l3.png")
-    @@bullet_img = Image.load("image/bullet_l1.png")
+    @@bullet_img = "image/bullet_l1.png"
     @@explosion_effects = []
     @@playerInfo_box = Image.new(72,66,C_WHITE)
     @@enemyInfo_box = Image.new(72,66,C_WHITE)
@@ -62,27 +64,32 @@ class Level1
 
 
     def initialize
+        @bullet_img = Image.load("image/bullet_l1.png")
+        puts "#{$tank}"
+        @playerTank_img = Image.load("image/#{$tank}.png")
+        @enemyTank_img = Image.load("image/enemy_l3.png")
         height = 4
         width = 3
         @metalSprites = []
         @woodenSprites = []
         @spikeSprites = []
         @enemyTank_sprites = []
-        @playerTank_sprite = PlayerTank.new(@@playerTank_img)
+        @playerTank_sprite = PlayerTank.new(@playerTank_img)
         @explosion_maxTime = 20
         @explosion_timer = 0
         @enemyShooting_offset = 300
         @enemyShooting_timer = @enemyShooting_offset
         
+        
         2.times do 
-            @enemyTank_sprites << EnemyTank.new(rand(90 .. 540),rand(95 .. 150),@@enemyTank_img)
+            @enemyTank_sprites << EnemyTank.new(rand(90 .. 540),rand(95 .. 150),@enemyTank_img)
         end
 
         2.times do 
-            @enemyTank_sprites << EnemyTank.new(rand(90 .. 540),rand(390 .. 505),@@enemyTank_img)
+            @enemyTank_sprites << EnemyTank.new(rand(90 .. 540),rand(390 .. 505),@enemyTank_img)
         end
 
-        @playerShoot = false
+     @playerShoot = false
         @enemyTankShoot = false
         @enemyBullet_posArr = Array.new(height){Array.new(width)}
         @explodeBullet = false
@@ -111,22 +118,22 @@ class Level1
                 when 1
                     @metalSprites << MetalCrate.new(j * 80, i * 75, @@metalCrate_img)
                     # Adding the sprite to the array
-                    puts "Metal : #{j * 80}, #{i * 75}, #{@@metalCrate_img.width}, #{@@metalCrate_img.height}"
+                    # puts "Metal : #{j * 80}, #{i * 75}, #{@@metalCrate_img.width}, #{@@metalCrate_img.height}"
         
                 when 2
                     @woodenSprites << WoodenCrate.new(j * 80, i * 75, @@woodenCrate_img)
-                    puts "Wooden : #{j * 80}, #{i * 75}"
+                    # puts "Wooden : #{j * 80}, #{i * 75}"
                     
                     
                 when 3
                     @spikeSprites << Spike.new(j * 80, i * 75,  @@spike_img)
-                    puts "Spike Top : #{j * 80}, #{i * 75}"
+                    # puts "Spike Top : #{j * 80}, #{i * 75}"
                     
                     
                 when 4
                     spikeTopSprite =  Spike.new(j * 80, i * 75, @@spike_img)
                     spikeTopSprite.angle=(180)
-                    puts "Spike Down : #{j * 80}, #{i * 75}"
+                    # puts "Spike Down : #{j * 80}, #{i * 75}"
                     
                     @spikeSprites << spikeTopSprite
                 end
@@ -175,7 +182,7 @@ class Level1
         # Start the enemy shooting timer
         @enemyShooting_timer-=1
 
-        puts "Enemy Shooting in #{@enemyShooting_timer/60}"
+        # puts "Enemy Shooting in #{@enemyShooting_timer/60}"
 
         Sprite.check(@playerTank_sprite, @metalSprites, :coll_with_metal)
         Sprite.check(@playerTank_sprite, @woodenSprites, nil) # Hit method of WoodenSprite is called
@@ -193,40 +200,37 @@ class Level1
                 # Setting the bullet pos
                 case(enemyTank_sprite.angle)
                 when 0
-                    @enemyBullet_posArr[idx][0] = enemyTank_sprite.x + @@enemyTank_img.width + 2
-                    @enemyBullet_posArr[idx][1] = enemyTank_sprite.y + @@enemyTank_img.height / 2
+                    @enemyBullet_posArr[idx][0] = enemyTank_sprite.x + @enemyTank_img.width + 2
+                    @enemyBullet_posArr[idx][1] = enemyTank_sprite.y + @enemyTank_img.height / 2
                 when 90
-                    @enemyBullet_posArr[idx][0] = enemyTank_sprite.x + @@enemyTank_img.width / 2
-                    @enemyBullet_posArr[idx][1] = enemyTank_sprite.y + @@enemyTank_img.height + 2
+                    @enemyBullet_posArr[idx][0] = enemyTank_sprite.x + @enemyTank_img.width / 2
+                    @enemyBullet_posArr[idx][1] = enemyTank_sprite.y + @enemyTank_img.height + 2
                 when -90
-                    @enemyBullet_posArr[idx][0] = enemyTank_sprite.x + @@enemyTank_img.width / 2
+                    @enemyBullet_posArr[idx][0] = enemyTank_sprite.x + @enemyTank_img.width / 2
                     @enemyBullet_posArr[idx][1] = enemyTank_sprite.y - 2
                 when 180
                     @enemyBullet_posArr[idx][0] = enemyTank_sprite.x - 2
-                    @enemyBullet_posArr[idx][1] = enemyTank_sprite.y + @@enemyTank_img.height / 2
+                    @enemyBullet_posArr[idx][1] = enemyTank_sprite.y + @enemyTank_img.height / 2
                 end
 
                 @enemyBullet_posArr[idx][2] = enemyTank_sprite.angle
                 @enemyBullet_posArr[idx][3] = 1
                 idx+=1
             end
-            
-            @enemyTankShoot = true
-            @enemyShooting_timer = @enemyShooting_offset
         end
 
         if @enemyTankShoot
             idx = 0
             @enemyBullet_posArr.each do |pos|
-                puts "x : #{pos[0]}, y : #{pos[1]}, perm : #{pos[3]}"
+                # puts "x : #{pos[0]}, y : #{pos[1]}, perm : #{pos[3]}"
                 if pos[3] == 1
-                    puts "x : #{pos[0]}, y : #{pos[1]}, perm : #{pos[3]}"
+                    # puts "x : #{pos[0]}, y : #{pos[1]}, perm : #{pos[3]}"
                     self.enemy_shootBullet(idx)
                 end
                 idx+=1
             end
         else
-            puts "Shooooting OVERRrrrrrrrrrrrrrrrr"
+            # puts "Shooooting OVERRrrrrrrrrrrrrrrrr"
         end
 
 
@@ -237,17 +241,17 @@ class Level1
             # Setting the bullet pos
             case(@tankShooting_angle)
             when 0
-                @bullet_x = @playerTank_sprite.x + @@playerTank_img.width + 2
-                @bullet_y = @playerTank_sprite.y + @@playerTank_img.height / 2
+                @bullet_x = @playerTank_sprite.x + @playerTank_img.width + 2
+                @bullet_y = @playerTank_sprite.y + @playerTank_img.height / 2
             when 90
-                @bullet_x = @playerTank_sprite.x + @@playerTank_img.width / 2
-                @bullet_y = @playerTank_sprite.y + @@playerTank_img.height + 2
+                @bullet_x = @playerTank_sprite.x + @playerTank_img.width / 2
+                @bullet_y = @playerTank_sprite.y + @playerTank_img.height + 2
             when -90
-                @bullet_x = @playerTank_sprite.x + @@playerTank_img.width / 2
+                @bullet_x = @playerTank_sprite.x + @playerTank_img.width / 2
                 @bullet_y = @playerTank_sprite.y - 2
             when 180
                 @bullet_x = @playerTank_sprite.x - 2
-                @bullet_y = @playerTank_sprite.y + @@playerTank_img.height / 2
+                @bullet_y = @playerTank_sprite.y + @playerTank_img.height / 2
             end
 
             @playerShoot = true
@@ -265,7 +269,7 @@ class Level1
     end
 
     def shoot_bullet
-        @bulletSprite = Bullet.new(@bullet_x, @bullet_y, Image.load("image/bullet_l1.png"))
+        @bulletSprite = Bullet.new(@bullet_x, @bullet_y, @bullet_img)
         @bulletSprite.angle=(@tankShooting_angle)
         @bulletSprite.draw
 
@@ -292,7 +296,7 @@ class Level1
 
         if (@bullet_x <= 0 || @bullet_x >= Window.width) ||
             (@bullet_y <= 0 || @bullet_y >= Window.height)
-            puts "Player can shoot now --------------------------"
+            # puts "Player can shoot now --------------------------"
             @playerShoot = false
         end
     end
@@ -313,7 +317,7 @@ class Level1
         end
         
 
-        puts "Size of array : #{@enemyBullet_posArr.size}"
+        # puts "Size of array : #{@enemyBullet_posArr.size}"
 
 
         case(@enemyBullet_posArr[idx][2])

@@ -8,6 +8,7 @@ $flag = 0
 $playerNickname = 'Akio'
 $avatar = 'playerYoru'
 $tank = 'goldTank'
+$tankChanged = false
 
 #window settings
 Window.width = 720
@@ -18,8 +19,7 @@ Window.bgcolor = C_WHITE
 $player = Player.new
 
 startStory = StartStory.new
-level1 = Level1.new
-
+level1 = nil
 
 Window.loop do
 case($flag)
@@ -57,6 +57,11 @@ case($flag)
       a = ChangeTank.new
       a.draw
     when 10
+      if $tankChanged
+        puts "Level1 created"
+        level1 = Level1.new
+        $tankChanged = false
+      end
       level1.draw
       level1.update
     when 11
