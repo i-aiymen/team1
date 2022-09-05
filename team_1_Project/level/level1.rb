@@ -1,9 +1,4 @@
-require_relative '../sprite/metalCrate'
-require_relative '../sprite/bullet'
-require_relative '../sprite/woodenCrate'
-require_relative '../sprite/spike'
-require_relative '../sprite/playerTank'
-require_relative '../sprite/enemyTank'
+Dir['../sprite/*.rb'].each { |file| require_relative file }
 
 class Level1
     # For the maps
@@ -23,8 +18,8 @@ class Level1
     @playerTank_sprite
     @enemyTank_sprites
     @bulletSprite
-    @playerShoot
-    @bullet_x
+    @playerShoot # bool : Player is shooting?
+    @bullet_x 
     @bullet_y
     @bullet_speed
     @tankShooting_angle # Angle of the bullet after tank fires it
@@ -39,8 +34,8 @@ class Level1
     @enemyBullet_x
     @enemyBullet_y
     
-    @enemyTankShoot
-    @enemyBullet_posArr
+    @enemyTankShoot # bool : enemy tank shooting?
+    @enemyBullet_posArr # Array containing bullet info of all enemySprites => 0 : x pos, 1 : y - pos, 2 : Angle of the enemey tank while shooting, 3 : Permission to shoot or not(If tank has vanished then no shooting)
 
     @playerTank_img
     @enemyTank_img
@@ -143,6 +138,7 @@ class Level1
         
     end
 
+    # Draw all the sprites
     def draw
         Sprite.draw(@woodenSprites)
         Sprite.draw(@metalSprites)
@@ -168,11 +164,12 @@ class Level1
         if 4 - @enemyTank_sprites.size == 4
             $flag = 11
         end
-        
-
-
     end
 
+    # Move : Player tank and enemy tanks
+    # Check for collisions
+    # Enemy Tank Shooting : timer
+    # Player Tank Shooting : Pressing the SPACE key
     def update
         @playerTank_sprite.move
         @enemyTank_sprites.each do |enemyTank|
@@ -270,6 +267,7 @@ class Level1
 
     end
 
+    # This function is called when player tank shoots
     def shoot_bullet
         @bulletSprite = Bullet.new(@bullet_x, @bullet_y, @bullet_img)
         @bulletSprite.angle=(@tankShooting_angle)
@@ -295,7 +293,7 @@ class Level1
             @bullet_y -= @bullet_speed
         end
 
-
+        # If the bullet passes through the boundary, it will DISAPPEAR 
         if (@bullet_x <= 0 || @bullet_x >= Window.width) ||
             (@bullet_y <= 0 || @bullet_y >= Window.height)
             # puts "Player can shoot now --------------------------"
@@ -303,8 +301,9 @@ class Level1
         end
     end
 
+    # This function is called when enemy sprites shoots
     def enemy_shootBullet(idx)
-
+        # A new bullet sprite is created using the details present in posArr
         enemyBullet_sprite = Bullet.new(@enemyBullet_posArr[idx][0], @enemyBullet_posArr[idx][1], Image.load("image/bullet_l1.png"))
         enemyBullet_sprite.angle=(@enemyBullet_posArr[idx][2])
         enemyBullet_sprite.draw
@@ -320,8 +319,6 @@ class Level1
         
 
         # puts "Size of array : #{@enemyBullet_posArr.size}"
-
-
         case(@enemyBullet_posArr[idx][2])
         when 0
             @enemyBullet_posArr[idx][0] += @bullet_speed
@@ -334,6 +331,8 @@ class Level1
         end
     end
 
+    # This function is called when:
+    # bullet touches metal crate, wooden crate, spike, tanks
     def show_explosion
         if @explosion_timer >= 5
             case(@explosion_timer / 5)
