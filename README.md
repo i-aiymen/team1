@@ -8,6 +8,9 @@
 - [ ] Add Bullet and explosion sounds
 - [ ] Add comments for all class and instance methods
 - [ ] Refactor level1.rb code
+- [ ] Include the map of levels and show it after each level
+- [ ] Improve the Info boxes of Level 2
+- [ ] Story needed after Level 1
 
 ## Bugs
 
