@@ -6,6 +6,8 @@
 - [ ] Add more levels
 - [ ] Work on the story experience
 - [ ] Add Bullet and explosion sounds
+- [ ] Add comments for all class and instance methods
+- [ ] Refactor level1.rb code
 
 ## Bugs
 
