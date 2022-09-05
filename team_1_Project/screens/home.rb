@@ -10,16 +10,15 @@ class Home
         @@rulesButton = Sprite.new(13,80, Image.load('image/rules.png'))
         @@musicButton = Sprite.new(660,17, Image.load('image/music.png'))
         @@exitButton = Sprite.new(660,80, Image.load('image/exit.png'))
-        @sound = Sound.new("music/music1.wav")
     end
 
     def music
-        @sound.play
+        $sound.play
         @@isPlaying = true
     end
 
     def musicStop 
-        @sound.stop
+        $sound.stop
         @@isPlaying = false
     end
 

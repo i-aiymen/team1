@@ -20,6 +20,9 @@ $player = Player.new
 
 startStory = StartStory.new
 level1 = nil
+$sound = Sound.new("music/music1.wav")
+
+
 
 Window.loop do
 case($flag)
