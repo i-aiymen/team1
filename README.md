@@ -5,6 +5,7 @@
 - [ ] Add more elements to the Start Story page
 - [ ] Add more levels
 - [ ] Work on the story experience
+- [ ] Add Bullet and explosion sounds
 
 ## Bugs
 
