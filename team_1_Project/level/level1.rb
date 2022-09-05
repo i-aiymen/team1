@@ -217,6 +217,8 @@ class Level1
                 @enemyBullet_posArr[idx][3] = 1
                 idx+=1
             end
+            @enemyTankShoot = true
+            @enemyShooting_timer = @enemyShooting_offset
         end
 
         if @enemyTankShoot
